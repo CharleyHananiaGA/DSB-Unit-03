@@ -4,7 +4,7 @@
 
 For the repository overview, unit contents, and PDF slide-deck completeness tracker, see [README-REPOSITORY.md](README-REPOSITORY.md). Every numbered learning-unit folder should contain its corresponding slide deck as a PDF.
 
-Key terms, functions and methods from the machine learning unit, running from probability to recommender systems. This glossary picks up where the [Unit 2 glossary](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD) (sections 1–11: Python, pandas and EDA) left off, so numbering starts at section 12, and terms already defined there are linked rather than repeated. Each of the 548 entries says what the term means, where it appears in the course, and (where relevant) shows working code.
+Key terms, functions and methods from the machine learning unit, running from probability to recommender systems. This glossary picks up where the [Unit 2 glossary](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD) (sections 1–11: Python, pandas and EDA) left off, so numbering starts at section 12, and terms already defined there are linked rather than repeated. Each of the 630 entries says what the term means, where it appears in the course, and (where relevant) shows working code.
 
 **How to read the examples.** Examples follow the course notebooks and assume the standard imports below. Extra libraries are imported inside the entries that need them; `statsmodels`, `imbalanced-learn`, `xgboost`, `arch` and `shap` may need installing with `pip install`.
 
@@ -67,16 +67,20 @@ Most notebooks read a CSV from the course `data/` folder, and the entries use th
 34. [DBSCAN and hierarchical clustering](#s34-dbscan-and-hierarchical-clustering)
 35. [Principal component analysis (PCA)](#s35-principal-component-analysis-pca)
 36. [Recommender systems](#s36-recommender-systems)
-37. [Bayesian statistics](#s37-bayesian-statistics)
+37. [Bayesian statistics and causal inference](#s37-bayesian-statistics)
 38. [Capstone playbook](#s38-capstone-playbook)
+39. [Neural networks](#s39-neural-networks)
+40. [NLP and foundation models](#s40-nlp-and-foundation-models)
+41. [Deploying and operating models](#s41-deploying-and-operating-models)
+42. [Building a front end with Streamlit](#s42-building-a-front-end-with-streamlit)
 
-[Audio summary](#audio-summary) · [Concept map](#concept-map) · [A–Z index](#a-z-index)
+[Audio summary](#audio-summary) · [Concept map](#concept-map) · [Course materials map](#course-materials-map) · [A–Z index](#a-z-index)
 
 <a id="concept-map"></a>
 
 ## Concept map
 
-The whole unit on one page: 27 modules, grouped into themes, with the key concepts of each (294 in all). Every concept is a link.
+The whole unit on one page: 31 modules, grouped into themes, with the key concepts of each (376 in all). Every concept is a link.
 
 **Using the clickable map.** GitHub displays SVG files as plain pictures, so the links inside the map only work when it's opened in a browser. On GitHub, use the **linked outline below**, which works right here. For the interactive map, use the GitHub Pages site: the [clickable mind map](https://charleyhananiaga.github.io/DSB-Unit-03/assets/ds-ml-glossary-mindmap.svg) and the [HTML glossary](https://charleyhananiaga.github.io/DSB-Unit-03/), which adds search, the audio summary and the clickable map embedded in the page. (To switch the site on: repository **Settings → Pages → Deploy from a branch → main / (root)**.) Offline, download the repository and open `assets/ds-ml-glossary-mindmap.svg` or `assets/ds-ml-glossary.html` in a browser.
 
@@ -94,6 +98,7 @@ The same map as a linked outline:
   - _scikit-learn:_ [LinearRegression](#linearregression), [Six-step workflow](#the-modeling-workflow-in-scikit-learn), [X is 2D, y is 1D](#x-is-2d-y-is-1d)
   - _Assumptions:_ [LINEM assumptions](#linem-assumptions), [Residual plot](#residual-plot), [VIF](#variance-inflation-factor-vif), [Log-transform y](#log-transforming-the-target)
   - _Extensions:_ [Dummy variables](#dummy-variables-in-regression), [statsmodels OLS](#statsmodels-ols), [PolynomialFeatures](#polynomialfeatures)
+  - _Lab:_ [Sacramento lab](#lab-sacramento-house-prices)
 - **[14. Regression metrics](#s14-regression-metrics)**
   - _Errors:_ [SSE](#sum-of-squared-errors-sse), [MSE](#mean-squared-error-mse), [RMSE](#root-mean-squared-error-rmse), [MAE](#mean-absolute-error-mae)
   - _Fit:_ [R²](#r2-coefficient-of-determination), [Adjusted R²](#adjusted-r2), [Null model](#null-model-baseline-for-regression)
@@ -101,6 +106,7 @@ The same map as a linked outline:
   - _Fit:_ [Underfitting](#underfitting), [Overfitting](#overfitting), [Bias](#bias), [Variance](#variance-model-variance), [Bias–variance trade-off](#bias-variance-trade-off), [Sampling bias](#sampling-bias)
   - _Holdout:_ [Train-test split](#train-test-split), [stratify / shuffle](#test-size-stratify-and-shuffle), [Train vs test scores](#reading-train-vs-test-scores)
   - _Cross-validation:_ [k-fold cross-validation](#k-fold-cross-validation), [KFold](#kfold), [cross_val_score()](#cross-val-score), [Data leakage](#data-leakage-in-model-evaluation)
+  - _More CV:_ [cross_validate()](#cross-validate-multiple-metrics)
 - **[16. k-Nearest Neighbors](#s16-k-nearest-neighbors)**
   - _Algorithm:_ [kNN algorithm](#k-nearest-neighbors-knn), [Distance metrics](#distance-metrics-euclidean-manhattan-minkowski), [Choosing k](#choosing-k)
   - _Practice:_ [Scaling](#scaling-for-distance-based-models), [KNeighborsClassifier](#kneighborsclassifier)
@@ -114,6 +120,7 @@ The same map as a linked outline:
   - _Confusion matrix:_ [Confusion matrix](#confusion-matrix), [TP / FP / TN / FN](#true-false-positives-and-negatives), [Type I & II errors](#type-i-and-type-ii-errors)
   - _Metrics:_ [Recall](#recall-sensitivity-true-positive-rate), [Precision](#precision), [Specificity](#specificity-true-negative-rate), [F1 score](#f1-score)
   - _Thresholds:_ [Threshold](#classification-threshold), [ROC curve](#roc-curve), [ROC AUC](#auc-roc-auc), [Precision–recall curve](#precision-recall-curve)
+  - _Lab:_ [Left-handedness lab](#lab-predicting-left-handedness)
 - **[19. Imbalanced classes](#s19-imbalanced-classes)**
   - _Problem:_ [Imbalanced classes](#imbalanced-classes), [Balanced accuracy](#balanced-accuracy)
   - _Resampling:_ [Oversampling](#oversampling), [RandomOverSampler](#randomoversampler), [SMOTE](#smote), [ADASYN](#adasyn)
@@ -126,6 +133,7 @@ The same map as a linked outline:
   - _Tuning:_ [Hyperparameter](#hyperparameter), [GridSearchCV](#gridsearchcv), [RandomizedSearchCV](#randomizedsearchcv)
   - _Results:_ [best*params*](#best-params-best-score-and-best-estimator), [cv*results*](#cv-results)
   - _Pipelines:_ [Pipeline](#pipelines-in-tuning), [step\_\_param names](#step-parameter-naming), [Pipeline + GridSearchCV](#pipeline-gridsearchcv)
+  - _More tuning:_ [ParameterGrid](#parametergrid), [loguniform search](#randomizedsearchcv-with-loguniform), [SelectKBest](#feature-selection-in-a-pipeline-selectkbest)
 - **[22. Explainability](#s22-model-explainability)**
   - _Why:_ [Explainability](#model-explainability), [White-box model](#white-box-model), [Black-box model](#black-box-model), [Global vs local](#global-vs-local-explanations)
   - _Tools:_ [plot_tree](#visualizing-a-decision-tree-plot-tree), [Feature importance](#feature-importance), [Permutation importance](#permutation-importance), [Partial dependence](#partial-dependence-plot-pdp), [SHAP](#shap-shapley-additive-explanations)
@@ -155,14 +163,17 @@ The same map as a linked outline:
 - **[28. Decision trees](#s28-decision-trees)**
   - _Structure:_ [Nodes & leaves](#root-node-internal-node-leaf-and-branch), [CART algorithm](#cart-algorithm), [Gini impurity](#gini-impurity)
   - _Control:_ [Stopping criteria](#stopping-criteria), [ccp_alpha pruning](#ccp-alpha-cost-complexity-pruning), [DecisionTreeClassifier](#decisiontreeclassifier-and-decisiontreeregressor)
+  - _Inspect & prune:_ [Pruning path](#cost-complexity-pruning-path), [Inspect a tree](#inspecting-a-fitted-tree)
 - **[29. Bagging & random forests](#s29-ensembles-bagging-and-random-forests)**
   - _Bootstrap:_ [Bootstrap sample](#bootstrap-sample), [Bagging](#bagging-bootstrap-aggregating), [BaggingClassifier](#baggingclassifier)
   - _Evaluate:_ [Out-of-bag error](#out-of-bag-oob-observations-and-error), [Feature importance in ensembles](#feature-importance-in-ensembles)
   - _Forests:_ [Random forest](#random-forest), [max_features](#max-features), [Stacking](#stacking)
+  - _Stacking:_ [Stacking in practice](#stacking-in-practice)
 - **[30. Boosting](#s30-ensembles-boosting)**
   - _Idea:_ [Boosting](#boosting), [Decision stump](#decision-stump), [Bagging vs boosting](#bagging-vs-boosting)
   - _Algorithms:_ [AdaBoost](#adaboost), [Gradient boosting](#gradient-boosting), [XGBoost](#xgboost)
   - _scikit-learn:_ [AdaBoostClassifier](#adaboostclassifier), [learning_rate](#learning-rate-and-n-estimators)
+  - _Diagnose:_ [Staged predictions](#staged-predictions-boosting-learning-curves)
 - **[31. Support vector machines](#s31-support-vector-machines)**
   - _Margins:_ [Separating hyperplane](#separating-hyperplane), [Maximal margin](#maximal-margin-classifier), [Support vectors](#support-vectors), [Soft margin](#soft-margin-classifier)
   - _Kernels:_ [Kernel trick](#kernel-trick), [Linear / poly / RBF](#linear-polynomial-and-rbf-kernels), [C](#c-svm)
@@ -175,10 +186,12 @@ The same map as a linked outline:
   - _Clustering:_ [Clustering](#clustering), [Uses of clustering](#uses-of-clustering), [k-means algorithm](#k-means), [Centroid](#centroid), [Birch & Affinity Prop.](#birch-and-affinity-propagation)
   - _scikit-learn:_ [KMeans](#kmeans), [labels* and cluster_centers*](#labels-and-cluster-centers), [Labels are arbitrary](#cluster-labels-are-arbitrary)
   - _Evaluation:_ [Inertia](#inertia-within-cluster-sum-of-squares), [Elbow method](#elbow-method), [Silhouette score](#silhouette-score)
+  - _Diagnose:_ [Silhouette plot](#silhouette-plot)
 - **[34. DBSCAN & hierarchical](#s34-dbscan-and-hierarchical-clustering)**
   - _DBSCAN:_ [DBSCAN](#dbscan), [eps & min_samples](#eps-and-min-samples), [Core / border / noise](#core-border-and-noise-points), [k-distance plot](#k-distance-plot), [HDBSCAN](#hdbscan)
   - _Hierarchical:_ [Agglomerative clustering](#agglomerative-clustering), [Linkage](#linkage), [Dendrogram](#dendrogram)
   - _Metrics:_ [External cluster metrics](#external-cluster-metrics), [ARI](#adjusted-rand-index-ari)
+  - _More algorithms:_ [Mean shift & spectral](#mean-shift-and-spectral-clustering)
 - **[35. PCA](#s35-principal-component-analysis-pca)**
   - _Idea:_ [Dimensionality reduction](#dimensionality-reduction), [Principal component](#principal-component)
   - _scikit-learn:_ [PCA()](#pca-in-scikit-learn), [Explained variance](#explained-variance-and-explained-variance-ratio), [Scree plot](#scree-plot), [Loadings](#loadings-components)
@@ -186,16 +199,36 @@ The same map as a linked outline:
 - **[36. Recommenders](#s36-recommender-systems)**
   - _Types:_ [Collaborative filtering](#collaborative-filtering), [Content-based & hybrid](#content-based-knowledge-based-and-hybrid-recommenders)
   - _Build:_ [Ratings matrix](#utility-ratings-matrix), [Sparse matrix](#sparse-matrix), [Cosine similarity](#cosine-similarity), [pairwise_distances()](#pairwise-distances)
-- **[37. Bayesian statistics](#s37-bayesian-statistics)**
+- **[37. Bayesian & causal](#s37-bayesian-statistics)**
   - _Ideas:_ [Bayesian statistics](#bayesian-statistics), [Frequentist vs Bayesian](#frequentist-vs-bayesian), [Bayes' theorem](#bayes-theorem), [Base rate fallacy](#base-rate-fallacy)
   - _Distributions:_ [Prior, likelihood, posterior](#prior-likelihood-and-posterior), [PMF & PDF](#probability-mass-and-density-functions), [Conjugate prior](#conjugate-prior-beta-binomial), [Credible interval](#credible-interval)
   - _Computing:_ [Grid approximation](#grid-approximation), [MCMC](#markov-chain-monte-carlo-mcmc), [PyMC](#pymc), [A/B testing](#bayesian-a-b-testing)
+  - _Priors:_ [Normal–normal](#normal-normal-updating), [Prior sensitivity](#prior-sensitivity-analysis), [Prior = Ridge](#a-prior-is-a-ridge-penalty-map-estimation), [Bayesian bootstrap](#bayesian-bootstrap)
+  - _Causal inference:_ [Causal inference](#causal-inference), [Potential outcomes](#potential-outcomes), [Experiments & balance](#randomised-experiments-and-balance), [LaLonde's test](#lalondes-test-observational-data-mislead), [Regression adjustment](#regression-adjustment), [Propensity score](#propensity-score), [Overlap](#overlap-common-support), [Matching](#propensity-score-matching), [IPW](#inverse-probability-weighting-ipw), [Love plot](#love-plot), [Assumptions](#causal-assumptions), [Checklist](#did-x-cause-y-a-checklist-and-how-to-report-it)
 - **[38. Capstone playbook](#s38-capstone-playbook)**
   - _Lifecycle:_ [Using the glossary](#using-this-glossary-for-your-capstone), [1 Frame](#stage-1-frame-the-question), [2 Data](#stage-2-get-and-understand-the-data), [3 Validate](#stage-3-choose-the-split-and-validation-strategy), [4 Baselines](#stage-4-build-baselines)
   - _Build:_ [5 Candidate models](#stage-5-choose-candidate-models), [Approach by question](#choosing-an-approach-by-question-type), [Model cheat sheet](#model-selection-cheat-sheet), [6 Pipeline & tune](#stage-6-build-a-pipeline-and-tune)
   - _Deliver:_ [7 Evaluate](#stage-7-evaluate-honestly), [8 Explain](#stage-8-interpret-and-explain), [9 Communicate](#stage-9-communicate-the-value), [10 Deploy](#stage-10-deploy-monitor-and-next-steps)
   - _Templates:_ [Classification](#capstone-template-classification), [Regression](#capstone-template-regression), [Time series](#capstone-template-time-series-forecasting), [Clustering](#capstone-template-clustering)
   - _Habits:_ [Mistakes checklist](#common-capstone-mistakes-checklist), [Library changes](#library-version-changes-to-know), [Reproducibility](#reproducibility-habits)
+  - _Compare:_ [Comparing models fairly](#comparing-many-models-fairly)
+- **[39. Neural networks](#s39-neural-networks)**
+  - _Building blocks:_ [Neural network](#neural-network), [Neuron](#artificial-neuron-perceptron), [Activations](#activation-functions), [MLP](#multilayer-perceptron-mlp)
+  - _Training:_ [Forward & backprop](#forward-pass-loss-and-backpropagation), [Epochs & optimizers](#epochs-batches-and-optimizers), [Vanishing gradients](#vanishing-and-exploding-gradients), [Overfitting](#overfitting-in-neural-networks)
+  - _Tools:_ [MLPClassifier](#mlpclassifier-and-mlpregressor), [Keras](#building-a-network-in-keras)
+  - _Architectures:_ [CNNs](#convolutional-neural-networks-cnns), [RNNs](#recurrent-neural-networks-and-sequence-models), [Transfer learning](#transfer-learning-and-pre-trained-models), [In a capstone](#neural-networks-in-a-capstone)
+- **[40. NLP & foundation models](#s40-nlp-and-foundation-models)**
+  - _Text as numbers:_ [NLP workflow](#the-nlp-workflow), [Tokens & cost](#tokenisation-and-token-cost), [BoW & TF-IDF](#bag-of-words-and-tf-idf), [Negation problem](#the-negation-problem), [Text classification](#text-classification-with-tf-idf)
+  - _Meaning:_ [Embeddings](#static-and-contextual-embeddings), [Cosine search](#cosine-similarity-and-semantic-search), [RAG](#retrieval-augmented-generation-rag)
+  - _Foundry:_ [Projects & deployments](#microsoft-foundry-projects-and-deployments), [Calling from Python](#calling-foundry-models-from-python), [Choosing a model](#choosing-a-foundation-model)
+  - _Evaluate & adapt:_ [Evaluating outputs](#evaluating-llm-outputs), [BLEU & ROUGE](#overlap-metrics-bleu-and-rouge), [AI judges](#ai-judges-and-groundedness), [Gates](#risk-based-evaluation-gates), [Safety](#safety-evaluators-and-red-teaming), [Prompt, RAG or tune?](#prompting-rag-or-fine-tuning), [LoRA](#fine-tuning-and-lora), [Fine-tuning data](#preparing-fine-tuning-data)
+- **[41. Deploy & operate](#s41-deploying-and-operating-models)**
+  - _Concepts:_ [MLOps](#mlops), [Batch vs online](#batch-vs-online-inference), [Cloud options](#cloud-deployment-options-and-trade-offs), [Readiness check](#production-readiness-check), [Drift](#model-drift-and-monitoring)
+  - _MLflow:_ [MLflow](#mlflow), [Track & log](#tracking-and-logging-a-pipeline-with-mlflow), [Registry & rollback](#model-registry-aliases-and-rollback), [Serve & test](#serving-a-model-locally-and-testing-requests)
+- **[42. Streamlit front ends](#s42-building-a-front-end-with-streamlit)**
+  - _Basics:_ [Streamlit](#streamlit), [Widgets & layout](#streamlit-widgets-and-layout), [Caching](#caching-models-and-data-in-streamlit), [Session state](#session-state-in-streamlit)
+  - _Build:_ [Prediction app](#a-prediction-app-for-your-capstone-model), [Explain predictions](#explaining-a-prediction-in-the-app), [Call an endpoint](#calling-a-model-endpoint-from-streamlit), [Secrets](#secrets-and-configuration-in-streamlit)
+  - _Ship:_ [Testing](#testing-a-streamlit-app), [Deploying](#deploying-a-streamlit-app), [Public release](#releasing-a-model-app-to-the-public)
 
 ---
 
@@ -1205,6 +1238,35 @@ results.predict(Xnew)
 
 See also: [p-value (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#p-value)
 
+<a id="lab-sacramento-house-prices"></a>
+
+### Lab: Sacramento house prices (regression)
+
+_Concept, statsmodels_
+
+The regression lab (985 Sacramento sales, May 2008) is a compact rehearsal of a capstone's data stage and modelling stage. Lessons worth reusing:
+
+- **Check every column**: one record needed repairing (state "AC", a negative price and square footage, and latitude and longitude in each other's columns); 3 rows were exact duplicates; 121 homes had 0 square feet, and 62 of them also had 0 beds and 0 baths (missing values, or non-market sales, not tiny houses).
+- **Read codes as text**: ZIP codes must stay strings (`dtype={"zip": str}`), or leading zeros vanish and they're treated as numbers.
+- **Choose the simple-regression predictor by correlation** (`sq__ft`, r ≈ 0.73), then add dummies for property type and check VIFs (all below 3).
+- **Report uncertainty**: `results.conf_int()` gives 95% confidence intervals. With the lab's full cleaning and property-type dummies, each extra square foot is associated with about **$153** more (95% CI about $139–$167), holding beds, baths and type constant.
+- **Iterate and compare with cross-validation**: adding latitude and longitude raised cross-validated R² from about 0.53 to 0.57.
+
+```python
+import statsmodels.api as sm
+
+sac = pd.read_csv("../data/sacramento_real_estate_transactions.csv", dtype={"zip": str})
+sac = sac[(sac["sq__ft"] > 0) & (sac["price"] > 0)].drop_duplicates()          # drop the impossible rows
+types = pd.get_dummies(sac["type"], dtype=int).drop(columns="Residential")              # Residential = baseline
+X_s = sm.add_constant(pd.concat([sac[["sq__ft", "beds", "baths"]], types], axis=1))
+ols = sm.OLS(sac["price"], X_s).fit()
+pd.concat([ols.params.rename("estimate"), ols.conf_int().rename(columns={0: "ci_low", 1: "ci_high"})], axis=1).round(1)
+# this simple filter gives about $131 per square foot (95% CI $116-$145): estimates depend on
+# cleaning choices, so record yours in the cleaning log and report them with the results
+```
+
+See also: [statsmodels OLS](#statsmodels-ols), [Dummy variables in regression](#dummy-variables-in-regression), [Variance inflation factor (VIF)](#variance-inflation-factor-vif), [Sacramento lab (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/labs/01%20-%20Regression-Sacramento/lab-regression-sacramento.ipynb), [Find and handle duplicates (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#find-and-handle-duplicates), [Define validation rules and check your data (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#define-validation-rules-and-check-your-data), [Import CSV and TSV files (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#import-csv-and-tsv-files)
+
 <a id="polynomial-regression"></a>
 
 ### Polynomial regression
@@ -1773,6 +1835,27 @@ cross_val_score(knn, X_train_sc, y_train, cv=10).mean()
 > **Watch out:** With a plain integer (`cv=5`), scikit-learn does **not** shuffle the rows for regression. If the data are in time order (bikeshare is), pass a shuffled `KFold`, or a `TimeSeriesSplit` if order genuinely matters.
 
 See also: [scoring parameter](#scoring-parameter)
+
+<a id="cross-validate-multiple-metrics"></a>
+
+### cross_validate() for several metrics at once
+
+_scikit-learn_
+
+`cross_val_score` returns one metric; `cross_validate` returns **several**, plus fit times and, with `return_train_score=True`, the training scores, so one call shows both performance and the train–test gap (overfitting) for every fold.
+
+```python
+from sklearn.model_selection import cross_validate
+
+abalone = pd.read_csv("../data/abalone.data", header=None,
+                      names=["sex", "length", "diameter", "height", "whole", "shucked", "viscera", "shell", "rings"])
+X_ab, y_ab = abalone.drop(columns=["sex", "rings"]), abalone["rings"]
+cv = cross_validate(KNeighborsRegressor(n_neighbors=15), X_ab, y_ab, cv=5,
+                    scoring=["r2", "neg_root_mean_squared_error"], return_train_score=True)
+pd.DataFrame(cv)[["train_r2", "test_r2", "test_neg_root_mean_squared_error"]].mean().round(3)
+```
+
+See also: [cross_val_score()](#cross-val-score), [Comparing many models fairly](#comparing-many-models-fairly)
 
 <a id="scoring-parameter"></a>
 
@@ -2689,6 +2772,24 @@ On the Whickham survival data (logistic regression, positive = died): threshold 
 
 See also: [Changing the threshold for imbalanced data](#changing-the-threshold-for-imbalanced-data)
 
+<a id="lab-predicting-left-handedness"></a>
+
+### Lab: predicting left-handedness (classification)
+
+_Concept_
+
+The classification lab asks whether 44 personality-survey answers predict left-handedness (about 4,000 respondents). Its most valuable lesson is a **negative result, handled honestly**:
+
+- **Baseline first**: 11.3% are left-handed, so "always right-handed" scores **88.7%** accuracy.
+- **Clean the codes**: `hand = 0` means "not answered" (dropped); "both hands" was excluded; answers of 0 mean missing.
+- **Spot duplicate questions**: Q27 and Q43 are the same item asked twice (correlation 0.93).
+- **Weak signal**: no survey item correlates with handedness by more than about 0.05.
+- **Results**: every regularised logistic regression predicted "right-handed" for everyone (exactly the baseline); kNN with small k predicted some left-handers but scored **below** the baseline; a class-balanced model reached ROC AUC **0.52**, no better than chance.
+
+The right conclusion is "these features don't predict handedness", not "try harder until something looks good". In a capstone, a well-evidenced null result, with a baseline and honest metrics, is a legitimate finding.
+
+See also: [Null accuracy](#null-accuracy), [Imbalanced classes](#imbalanced-classes), [AUC (ROC AUC)](#auc-roc-auc), [Left-handedness lab walkthrough (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/labs/02%20-%20Classification-LeftHanded/lab-classification-left-handedness-WALKTHROUGH.ipynb), [EDA for a classification target (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#eda-for-a-classification-target), [Placeholder values for missing data (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#placeholder-values-for-missing-data)
+
 <a id="precision-recall-trade-off"></a>
 
 ### Precision–recall trade-off
@@ -3415,6 +3516,25 @@ gs.score(X_test_sc, y_test)          # check the test set once, at the end
 
 See also: [Reading grid search results](#reading-grid-search-results)
 
+<a id="parametergrid"></a>
+
+### ParameterGrid
+
+_scikit-learn_
+
+Lists every combination a grid search will try, so you can count the fits **before** running a slow search (combinations × folds, plus one refit).
+
+```python
+from sklearn.model_selection import ParameterGrid
+
+grid = {"knn__n_neighbors": [5, 15, 25, 35], "knn__weights": ["uniform", "distance"], "knn__p": [1, 2]}
+combos = list(ParameterGrid(grid))
+len(combos), len(combos) * 5 + 1                  # (16, 81): 16 combinations, 81 fits with 5-fold CV
+combos[0]
+```
+
+See also: [GridSearchCV](#gridsearchcv), [The cost of grid searching](#the-cost-of-grid-searching)
+
 <a id="param-grid"></a>
 
 ### param_grid
@@ -3509,6 +3629,29 @@ rs = RandomizedSearchCV(KNeighborsRegressor(),
 rs.fit(X_train_sc, y_train)
 ```
 
+<a id="randomizedsearchcv-with-loguniform"></a>
+
+### RandomizedSearchCV with loguniform
+
+_scikit-learn, SciPy_
+
+For strengths that span orders of magnitude (`C`, `alpha`, learning rates), sample from a **log-uniform** distribution so 0.001–0.01 gets as many tries as 10–100. A fixed budget (`n_iter`) of random combinations usually finds a good region much faster than a full grid.
+
+```python
+from scipy.stats import loguniform
+from sklearn.model_selection import RandomizedSearchCV
+
+heart = pd.read_csv("../data/SAheart.data", skipinitialspace=True)
+heart["famhist"] = (heart["famhist"] == "Present").astype(int)
+X_h, y_h = heart.drop(columns=["row.names", "chd"]), heart["chd"]
+pipe = Pipeline([("sc", StandardScaler()), ("lr", LogisticRegression(solver="liblinear"))])
+search = RandomizedSearchCV(pipe, {"lr__C": loguniform(1e-3, 1e2), "lr__penalty": ["l1", "l2"]},
+                            n_iter=30, cv=5, scoring="roc_auc", random_state=42).fit(X_h, y_h)
+search.best_params_, round(search.best_score_, 3)
+```
+
+See also: [RandomizedSearchCV](#randomizedsearchcv), [C (inverse regularization strength)](#c-inverse-regularization-strength), [Grid search notebook (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/12%20-%20Grid%20Search%20and%20Pipelines/02-gridsearch-pipelines-live.ipynb)
+
 <a id="stratifiedkfold"></a>
 
 ### StratifiedKFold
@@ -3578,6 +3721,35 @@ gs.best_params_, gs.best_score_, gs.score(X_te, y_te)
 During cross-validation the `ColumnTransformer` is refitted on each training fold; `gs.best_estimator_.named_steps["prep"]` is the version fitted on the full training set.
 
 See also: [ColumnTransformer (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#columntransformer)
+
+<a id="feature-selection-in-a-pipeline-selectkbest"></a>
+
+### Feature selection in a pipeline (SelectKBest)
+
+_scikit-learn_
+
+`SelectKBest` keeps the k features most related to the target (by an F-test, `f_classif`/`f_regression`, or mutual information). Inside a pipeline it's refitted on each training fold, so the selection never sees validation data, and `k` can be tuned like any hyperparameter.
+
+```python
+from sklearn.feature_selection import SelectKBest, f_classif
+
+pipe = Pipeline([("sc", StandardScaler()), ("select", SelectKBest(f_classif)),
+                 ("lr", LogisticRegression(max_iter=1000))])
+# X_h, y_h: the heart data loaded in the RandomizedSearchCV entry above
+gs = GridSearchCV(pipe, {"select__k": [2, 4, 6, 9]}, cv=5, scoring="roc_auc").fit(X_h, y_h)
+gs.best_params_
+X_h.columns[gs.best_estimator_.named_steps["select"].get_support()].tolist()   # the features kept
+```
+
+On the heart data the search keeps all 9 features (`k=9`): every feature adds a little, so selection doesn't help here. That's a useful result in itself; on wide data (hundreds of features), selection often matters much more.
+
+```python
+# (the selected features are listed above)
+```
+
+> **Watch out:** selecting features on the full dataset before cross-validation leaks information and inflates scores; keep the selector inside the pipeline.
+
+See also: [Pipeline + GridSearchCV](#pipeline-gridsearchcv), [Data leakage (in model evaluation)](#data-leakage-in-model-evaluation)
 
 <a id="make-pipeline"></a>
 
@@ -5702,6 +5874,51 @@ _scikit-learn_
 
 A complexity penalty like α in regularization: grow the tree, then prune back branches that don't improve the fit enough to justify their complexity. Larger `ccp_alpha` = smaller tree. Default 0 (no pruning).
 
+<a id="cost-complexity-pruning-path"></a>
+
+### cost_complexity_pruning_path()
+
+_scikit-learn_
+
+Lists the effective `ccp_alpha` values at which a fully grown tree would lose branches, so you can cross-validate exactly those values rather than guessing a grid. Larger alpha means a smaller tree; pick the alpha with the best cross-validated score (or the smallest tree within one standard error of it).
+
+```python
+from sklearn.model_selection import cross_val_score
+
+titanic = pd.read_csv("../data/titanic_clean.csv")
+X_t = titanic.select_dtypes("number").drop(columns=["Survived", "PassengerId"], errors="ignore").fillna(0)
+y_t = titanic["Survived"]
+path = DecisionTreeClassifier(random_state=42).cost_complexity_pruning_path(X_t, y_t)
+alphas = path.ccp_alphas[::10]                                      # a sample of the candidate alphas
+scores = [cross_val_score(DecisionTreeClassifier(ccp_alpha=a, random_state=42), X_t, y_t, cv=5).mean()
+          for a in alphas]
+best_alpha = alphas[int(np.argmax(scores))]
+pruned = DecisionTreeClassifier(ccp_alpha=best_alpha, random_state=42).fit(X_t, y_t)
+round(best_alpha, 4), pruned.get_depth(), pruned.get_n_leaves()      # a far smaller tree than the full one
+```
+
+See also: [ccp_alpha (cost-complexity pruning)](#ccp-alpha-cost-complexity-pruning), [Inspecting a fitted tree](#inspecting-a-fitted-tree), [Decision trees notebook (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/20%20-%20Decision%20Trees%20with%20CART/02-decision-trees-live.ipynb)
+
+<a id="inspecting-a-fitted-tree"></a>
+
+### Inspecting a fitted tree
+
+_scikit-learn_
+
+Quick checks on any fitted tree: `get_depth()` and `get_n_leaves()` measure its complexity (a tree with nearly as many leaves as training rows has memorised them), `export_text()` prints its rules, and `decision_path()` shows which nodes one prediction passed through, a simple local explanation.
+
+```python
+from sklearn.tree import export_text
+
+full = DecisionTreeClassifier(random_state=42).fit(X_t, y_t)
+full.get_depth(), full.get_n_leaves()                                 # deep, with many leaves
+print(export_text(pruned, feature_names=list(X_t.columns), max_depth=2))
+node_path = pruned.decision_path(X_t.iloc[[0]]).indices               # nodes visited by the first passenger
+node_path
+```
+
+See also: [Visualizing a decision tree (plot_tree)](#visualizing-a-decision-tree-plot-tree), [Global vs local explanations](#global-vs-local-explanations)
+
 <a id="decisiontreeclassifier-and-decisiontreeregressor"></a>
 
 ### DecisionTreeClassifier and DecisionTreeRegressor
@@ -6002,6 +6219,38 @@ vc.fit(X_train, y_train)
 vc.score(X_test, y_test)
 ```
 
+<a id="stacking-in-practice"></a>
+
+### Stacking in practice: is it worth it?
+
+_scikit-learn_
+
+Stacking trains a **meta-model** on the **out-of-fold** predictions of diverse base models (`StackingClassifier(estimators, final_estimator, cv=5)` builds those predictions with internal cross-validation, which prevents leakage; `cross_val_predict` does the same by hand). It helps most when base models are **diverse** and make **different** mistakes. In the course's churn lab, the base models disagreed a lot (logistic regression caught 73 of 362 training churners, gradient boosting 279), so combining them helped in cross-validation: stacking beat the best single model in 6–8 of 10 folds, by about 0.005 ROC AUC on average. On the **test** set, though, the single gradient-boosting model was slightly better on ROC AUC and average precision, while stacking edged it on F1. Stacking also took about 60 seconds to fit versus a fraction of that for one model.
+
+```python
+from sklearn.ensemble import StackingClassifier, RandomForestClassifier, GradientBoostingClassifier
+from sklearn.pipeline import make_pipeline
+
+churn = pd.read_csv("../data/cell_phone_churn.csv")              # the stacking lab's data: 14.5% churn
+churn["intl_plan"] = (churn["intl_plan"] == "yes").astype(int)
+churn["vmail_plan"] = (churn["vmail_plan"] == "yes").astype(int)
+X_c = churn.drop(columns=["state", "area_code", "churn"])
+y_c = churn["churn"].astype(int)
+X_tr, X_te, y_tr, y_te = train_test_split(X_c, y_c, test_size=0.25, stratify=y_c, random_state=42)
+
+base = [("logreg", make_pipeline(StandardScaler(), LogisticRegression(max_iter=2000))),
+        ("knn", make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=15))),
+        ("forest", RandomForestClassifier(n_estimators=200, random_state=42))]
+stack = StackingClassifier(estimators=base, final_estimator=LogisticRegression(max_iter=2000), cv=5)
+for name, model in [("forest alone", base[2][1]), ("stacking", stack)]:
+    auc = cross_val_score(model, X_tr, y_tr, cv=5, scoring="roc_auc").mean()
+    print(f"{name:13s} CV ROC AUC {auc:.3f}")
+```
+
+**When stacking is a good choice:** a competition-style goal where small gains matter, diverse base models that each have a strength, and enough data for honest cross-validation. **When it isn't:** you need interpretability, fast predictions or simple maintenance, or the gain over the best single model is within the noise. Always compare against the best single model on the **same** folds.
+
+See also: [Stacking](#stacking), [VotingClassifier](#votingclassifier), [Comparing many models fairly](#comparing-many-models-fairly)
+
 <a id="which-model-is-best"></a>
 
 ### Which model is best?
@@ -6183,6 +6432,36 @@ gs.best_params_
 ```
 
 Key hyperparameters: `n_estimators`, `learning_rate`, `max_depth`, and `subsample` (below 1.0 gives stochastic gradient boosting). Smaller learning rates need more trees but usually generalize better. On the spam data, 100 depth-3 trees (the defaults) score 0.968 train / **0.946** test, beating 200 stumps: slightly bigger trees capture interactions between words. scikit-learn's `HistGradientBoostingClassifier` is a much faster version that handles missing values natively.
+
+<a id="staged-predictions-boosting-learning-curves"></a>
+
+### Staged predictions: boosting learning curves
+
+_scikit-learn_
+
+Boosting adds trees one at a time, so `staged_predict` / `staged_predict_proba` (gradient boosting) and `staged_score` (AdaBoost) return the model's predictions **after each tree**, from one fitted model. Plotting test error against the number of trees shows where extra trees stop helping, or start overfitting, without refitting for every value of `n_estimators`.
+
+```python
+from sklearn.ensemble import GradientBoostingClassifier
+
+names = [line.split(":")[0] for line in open("../data/spam-colnames.txt")
+         if line.startswith(("word_freq", "char_freq", "capital_run"))]
+spam = pd.read_csv("../data/spam.csv", sep=" ", header=None, names=names + ["spam"])   # no header row
+X_sp, y_sp = spam.drop(columns="spam"), spam["spam"]
+X_tr, X_te, y_tr, y_te = train_test_split(X_sp, y_sp, test_size=0.25, stratify=y_sp, random_state=42)
+gb = GradientBoostingClassifier(n_estimators=300, learning_rate=0.1, random_state=42).fit(X_tr, y_tr)
+test_error = [1 - accuracy_score(y_te, p) for p in gb.staged_predict(X_te)]
+best_n = int(np.argmin(test_error)) + 1
+
+fig, ax = plt.subplots(figsize=(7, 3.5))
+ax.plot(range(1, len(test_error) + 1), test_error)
+ax.axvline(best_n, ls="--", color="grey")
+ax.set(xlabel="number of trees", ylabel="test error", title=f"Test error by number of trees (lowest at {best_n})")
+```
+
+> **Watch out:** choosing the number of trees from **test** error tunes on the test set; in a real project use a validation split or `n_iter_no_change` (early stopping), and keep the test set for the final check.
+
+See also: [Gradient boosting](#gradient-boosting), [learning_rate and n_estimators](#learning-rate-and-n-estimators), [Ensemble models notebook (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/21%20-%20Bootstrapping%20Bagging%20and%20Random%20Forests/03-ensemble-models-live.ipynb)
 
 <a id="xgboost"></a>
 
@@ -6902,6 +7181,36 @@ plt.plot(range(2, 11), silhouette_list, marker="o")
 
 > **Watch out:** Silhouette rewards compact, round blobs, so it can mislead for density-based clusters. On the circles data, DBSCAN's correct two-ring solution scores silhouette **0.24**, lower than k-means' completely wrong solution (0.27). For non-convex clusters, judge visually or with labels. And compute it on the **same (scaled) data** the model was fitted on; passing the unscaled X is an easy slip.
 
+<a id="silhouette-plot"></a>
+
+### Silhouette plot
+
+_scikit-learn, matplotlib_
+
+The silhouette **score** averages over all points; a silhouette **plot** (`silhouette_samples`) shows every point's value, sorted within each cluster. Wide clusters full of high values are well separated; thin clusters, or many negative values (points closer to another cluster than their own), point to a poor choice of k.
+
+```python
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_samples, silhouette_score
+
+geyser = pd.read_csv("../data/geyser.csv")
+X_g = StandardScaler().fit_transform(geyser.select_dtypes("number"))
+labels = KMeans(n_clusters=2, n_init=10, random_state=42).fit_predict(X_g)
+values = silhouette_samples(X_g, labels)
+
+fig, ax = plt.subplots(figsize=(6, 4))
+y_lower = 0
+for k in np.unique(labels):
+    v = np.sort(values[labels == k])
+    ax.fill_betweenx(np.arange(y_lower, y_lower + len(v)), 0, v, alpha=0.7, label=f"cluster {k}")
+    y_lower += len(v) + 10
+ax.axvline(silhouette_score(X_g, labels), ls="--", color="grey")    # the average (the silhouette score)
+ax.set(xlabel="silhouette value", yticks=[], title="Silhouette plot: both clusters well separated")
+ax.legend()
+```
+
+See also: [Silhouette score](#silhouette-score), [Elbow method](#elbow-method), [k-means notebook (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/25%20-%20Intro%20to%20Clustering%20with%20K-Means/02a-kmeans-live.ipynb)
+
 <a id="choosing-the-number-of-clusters"></a>
 
 ### Choosing the number of clusters
@@ -7146,6 +7455,27 @@ No algorithm wins everywhere. DBSCAN excels on irregular shapes; k-means and war
 > **Watch out:** Set `random_state=42` on `KMeans` so results don't change on each run. k-medoids isn't in core scikit-learn (it's in the separate `scikit-learn-extra` package).
 
 See also: [Adjusted Rand index (ARI)](#adjusted-rand-index-ari)
+
+<a id="mean-shift-and-spectral-clustering"></a>
+
+### Mean shift and spectral clustering
+
+_scikit-learn_
+
+Two further clustering algorithms from the live DBSCAN lesson. **Mean shift** moves every point uphill towards the densest nearby region and groups points that end at the same peak; it chooses the number of clusters itself, controlled by a **bandwidth** (`estimate_bandwidth` suggests one). **Spectral clustering** builds a similarity graph between points and clusters its structure, so it can find non-convex shapes such as rings or crescents (like DBSCAN), but you set `n_clusters`, and it's slow on large data.
+
+```python
+from sklearn.cluster import MeanShift, SpectralClustering, estimate_bandwidth
+from sklearn.datasets import make_moons
+
+X_m, _ = make_moons(n_samples=300, noise=0.06, random_state=42)
+bandwidth = estimate_bandwidth(X_m, quantile=0.2, random_state=42)
+ms_labels = MeanShift(bandwidth=bandwidth).fit_predict(X_m)
+sc_labels = SpectralClustering(n_clusters=2, affinity="nearest_neighbors", random_state=42).fit_predict(X_m)
+len(np.unique(ms_labels)), np.bincount(sc_labels)                 # mean shift picks its own k; spectral finds the two moons
+```
+
+See also: [DBSCAN](#dbscan), [Comparing clustering algorithms](#comparing-clustering-algorithms), [DBSCAN and other clustering notebook (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/26%20-%20DBSCAN%20and%20Other%20Clustering%20Techniques/02a-dbscan-and-other-clustering-live.ipynb)
 
 <a id="adjusted-rand-index-ari"></a>
 
@@ -7502,11 +7832,11 @@ Subtracting each user's (or the overall) average rating so that a 4 from a harsh
 
 <a id="s37-bayesian-statistics"></a>
 
-## 37. Bayesian statistics
+## 37. Bayesian statistics and causal inference
 
-_A one-shot introduction to the other school of statistics: treating unknown parameters as uncertain, describing that uncertainty with probability distributions, and updating them with data (prior + data → posterior). Covers Bayes' theorem, probability mass and density functions, conjugate priors, MCMC and an election-forecasting example, building on the probability and simulation sections._
+_A one-shot introduction to the other school of statistics: treating unknown parameters as uncertain, describing that uncertainty with probability distributions, and updating them with data (prior + data → posterior). Covers Bayes' theorem, probability mass and density functions, conjugate priors, MCMC and an election-forecasting example, building on the probability and simulation sections. It then adds normal–normal updating and prior sensitivity, the link between priors and Ridge, and **causal inference**: potential outcomes, balance, regression adjustment, propensity scores, matching, weighting and a Bayesian posterior for a causal effect, using the job-training (NSW) experiment and survey data._
 
-**In your capstone:** Use Bayesian methods to combine prior knowledge with limited data, and to report results as direct probabilities ("P(B beats A) = 97%").
+**In your capstone:** Use Bayesian methods to combine prior knowledge with limited data, and to report results as direct probabilities ("P(B beats A) = 97%"). If your question is causal ("did X cause Y?"), use the [causal inference checklist](#did-x-cause-y-a-checklist-and-how-to-report-it): check balance and overlap, match or weight, and report the effect with its uncertainty and assumptions.
 
 <a id="bayesian-statistics"></a>
 
@@ -7708,6 +8038,387 @@ See also: [A/B test (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/bl
 
 ---
 
+<a id="normal-normal-updating"></a>
+
+### Normal–normal updating (a prior for an average)
+
+_Concept, SciPy_
+
+The second ready-made Bayesian recipe (the first is the [Beta–binomial](#conjugate-prior-beta-binomial) for rates). When the prior for an average effect is normal and the data's estimate is roughly normal (an estimate plus its standard error), the posterior is normal too, and its mean is a **precision-weighted average** of the prior mean and the estimate. Precision is 1 / variance, so whichever is more certain pulls harder.
+
+The course's job-training experiment (National Supported Work, NSW: 185 trained, 260 randomised controls) estimates the effect on 1978 earnings as **$1,794 with a standard error of $671**:
+
+```python
+from scipy import stats
+
+def posterior_normal(prior_mean, prior_sd, estimate, se):
+    """Normal prior + normal likelihood -> normal posterior (mean, sd)."""
+    precision = 1 / prior_sd ** 2 + 1 / se ** 2
+    mean = (prior_mean / prior_sd ** 2 + estimate / se ** 2) / precision
+    return mean, np.sqrt(1 / precision)
+
+estimate, se = 1794.3, 671.0
+priors = {"flat (no opinion)": (0, 1e6), "sceptical (mean 0, sd $500)": (0, 500),
+          "optimistic (mean $2,000, sd $1,000)": (2000, 1000)}
+rows = []
+for name, (m0, s0) in priors.items():
+    m, s = posterior_normal(m0, s0, estimate, se)
+    rows.append({"prior": name, "posterior mean": m, "95% CrI low": m - 1.96 * s, "95% CrI high": m + 1.96 * s,
+                 "P(effect > 0)": 1 - stats.norm.cdf(0, m, s), "P(effect > $1,000)": 1 - stats.norm.cdf(1000, m, s)})
+prior_table = pd.DataFrame(rows).set_index("prior").round(3)
+prior_table
+```
+
+| Prior | Posterior mean | 95% credible interval | P(effect > 0) | P(effect > $1,000) |
+| --- | --- | --- | --- | --- |
+| Flat (no opinion) | $1,794 | $479 to $3,109 | 99.6% | 88.2% |
+| Sceptical (mean 0, sd $500) | $641 | −$145 to $1,426 | 94.5% | 18.5% |
+| Optimistic (mean $2,000, sd $1,000) | $1,858 | $766 to $2,950 | 100% | 93.8% |
+
+See also: [Prior, likelihood and posterior](#prior-likelihood-and-posterior), [Prior sensitivity analysis](#prior-sensitivity-analysis), [Credible interval](#credible-interval), [Gradient descent, Bayes and causal inference slides (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/24%20-%20Gradient%20Descent/29%20-%20Bayesian%20Modelling%20Basian%20Descent%20Causal%20Inference.pdf)
+
+<a id="prior-sensitivity-analysis"></a>
+
+### Prior sensitivity analysis
+
+_Concept_
+
+Rerunning a Bayesian analysis under several **reasonable** priors and reporting how much the conclusion moves. In the table above, every prior agrees the programme probably helped (P(effect > 0) of 94.5% or more), but whether the effect exceeds $1,000 depends heavily on the prior (18.5% under the sceptical prior vs 93.8% under the optimistic one). That's the honest summary: the direction is robust, the size isn't.
+
+A confident (narrow) prior needs a lot of data to overrule. If reasonable priors change your decision, say so in the report rather than choosing the prior that gives the answer you wanted.
+
+> **Watch out:** choose and justify priors **before** looking at the results (from earlier studies, domain knowledge or a deliberately sceptical stance), and show the flat-prior result alongside, so readers can see how much the prior contributed.
+
+See also: [Normal–normal updating](#normal-normal-updating), [Sensitivity analysis](#sensitivity-analysis)
+
+<a id="a-prior-is-a-ridge-penalty-map-estimation"></a>
+
+### A prior is a ridge penalty (MAP estimation)
+
+_Concept, scikit-learn_
+
+Gradient descent can minimise the **negative log-posterior** (data loss + a penalty from the prior) instead of the plain loss. It then lands on the posterior's peak, the **maximum a posteriori (MAP)** estimate: $641 under the sceptical prior, matching the formula exactly. A normal prior centred on 0 adds a penalty proportional to β², which is exactly a **Ridge** penalty, with `alpha` = noise variance ÷ prior variance: a narrower prior means a bigger alpha and more shrinkage.
+
+```python
+from sklearn.linear_model import Ridge
+
+nsw = pd.read_csv("../data/nsw_experiment.csv")
+y = nsw["earn78"].values
+t_c, y_c = nsw["treat"].values - nsw["treat"].mean(), y - y.mean()
+noise_var = np.var(y - LinearRegression().fit(nsw[["treat"]], y).predict(nsw[["treat"]]), ddof=2)
+for prior_sd in [250, 500, 2000]:
+    ridge = Ridge(alpha=noise_var / prior_sd ** 2).fit(nsw[["treat"]], y).coef_[0]
+    bayes = (t_c @ y_c) / (t_c @ t_c + noise_var / prior_sd ** 2)        # posterior mean, prior centred on 0
+    print(f"prior sd ${prior_sd:>5,}: Ridge {ridge:7,.1f} | Bayes {bayes:7,.1f}")   # identical
+```
+
+The difference that matters: gradient descent (and Ridge) give **one number**; Bayes gives the **whole distribution**, so you can say how sure you are.
+
+See also: [Ridge regression (L2)](#ridge-regression-l2), [Regularization](#regularization), [Gradient descent](#gradient-descent)
+
+<a id="causal-inference"></a>
+
+### Causal inference
+
+_Concept_
+
+Estimating whether, and by how much, one thing **causes** another: did the job-training programme raise earnings, did the discount increase sales, did the new process reduce failures? Prediction asks "what will happen?"; causal inference asks "what would happen **if we changed** something?". The two need different methods: a model that predicts well can still give a badly wrong causal answer, because of **confounders** (variables that affect both who gets the treatment and the outcome).
+
+The course case study (Lalonde, 1986) shows how badly: with a randomised experiment, training raised 1978 earnings by about **$1,794**; comparing the same trainees with ordinary survey respondents instead gives **−$8,498**, the wrong sign. The fixes in this section (regression adjustment, propensity-score matching and weighting) recover estimates close to the experimental answer.
+
+See also: [Potential outcomes](#potential-outcomes), [Did X cause Y? A checklist and how to report it](#did-x-cause-y-a-checklist-and-how-to-report-it), [Confounding variable (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#confounding-variable), [Correlation does not imply causation (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#correlation-does-not-imply-causation), [Causal inference notebook (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/24%20-%20Gradient%20Descent/02b-bayesian-gradient-descent-causal-inference-live.ipynb)
+
+<a id="potential-outcomes"></a>
+
+### Potential outcomes
+
+_Concept_
+
+The language of causal inference (Rubin's framework). Each person has **two** potential outcomes: **Y(1)** if treated and **Y(0)** if not; the causal effect for that person is Y(1) − Y(0). The **fundamental problem**: we only ever observe one of them, so causal inference is a **missing-data problem**, and every method is a way of filling in the missing column.
+
+| Person | Trained? | Y(1): earnings if trained | Y(0): earnings if not | Effect |
+| --- | --- | --- | --- | --- |
+| A | yes | $9,930 | ? | ? |
+| B | no | ? | $4,200 | ? |
+| C | yes | $3,596 | ? | ? |
+
+Averages you can estimate: the **ATE** (average treatment effect, over everyone) and the **ATT** (average effect on the treated, the question "did it help the people who took part?", which this lesson estimates).
+
+See also: [Causal inference](#causal-inference), [Randomised experiments and balance](#randomised-experiments-and-balance)
+
+<a id="randomised-experiments-and-balance"></a>
+
+### Randomised experiments and balance
+
+_Concept, pandas_
+
+When a coin flip decides who is treated, treatment is unrelated to background, so the control group's outcomes are a fair stand-in for the treated group's missing Y(0), and the **simple difference in means is a valid causal estimate**. Check that randomisation worked with **standardised mean differences (SMD)**: the difference in each covariate's mean between groups, in pooled standard deviations. A fair comparison needs |SMD| below about **0.1**.
+
+```python
+nsw = pd.read_csv("../data/nsw_experiment.csv")        # the randomised experiment
+covariates = ["age", "educ", "black", "hispanic", "married", "nodegree", "earn74", "earn75"]
+
+def smd_table(df, treat="treat", cols=covariates, weights=None):
+    """Standardised mean difference for each column (optionally weighting the control group)."""
+    t, c = df[df[treat] == 1], df[df[treat] == 0]
+    w = np.ones(len(c)) if weights is None else np.asarray(weights)[df[treat].values == 0]
+    out = {}
+    for col in cols:
+        mean_c = np.average(c[col], weights=w)
+        var_c = np.average((c[col] - mean_c) ** 2, weights=w)
+        out[col] = (t[col].mean() - mean_c) / np.sqrt((t[col].var() + var_c) / 2)
+    return pd.Series(out, name="SMD")
+
+smd_table(nsw).round(2)                                       # mostly small; nodegree -0.30 is the largest
+benchmark = nsw.loc[nsw["treat"] == 1, "earn78"].mean() - nsw.loc[nsw["treat"] == 0, "earn78"].mean()
+round(benchmark)                                              # 1794: the experimental benchmark
+```
+
+Even a real randomised experiment can leave some chance imbalance in a small sample (here `nodegree`, −0.30). Report it, and if a covariate is badly imbalanced, adjust for it with regression as a robustness check.
+
+```python
+# (the benchmark above is the difference in mean 1978 earnings: trained minus control)
+```
+
+See also: [A/B test (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#a-b-test), [Love plot](#love-plot)
+
+<a id="lalondes-test-observational-data-mislead"></a>
+
+### LaLonde's test: observational data mislead
+
+_Concept, pandas_
+
+Keep the 185 trained people, but replace the randomised controls with **15,992 survey respondents** who weren't in the programme (the Current Population Survey, CPS). Now the groups were never comparable: trainees were younger, less educated, more likely Black and unmarried, and earned far less in 1974–75 (SMDs of 1.5 to 2.4). The naive comparison mixes the programme's effect with those pre-existing differences.
+
+```python
+survey = pd.read_csv("../data/cps_survey.csv")
+obs = pd.concat([nsw[nsw["treat"] == 1], survey], ignore_index=True)    # trainees + survey "controls"
+naive = obs.loc[obs["treat"] == 1, "earn78"].mean() - obs.loc[obs["treat"] == 0, "earn78"].mean()
+round(naive)                                                  # -8498: the wrong sign
+smd_table(obs).round(2)                                       # huge imbalances, e.g. black 2.43
+```
+
+This is the situation in most capstone data: no experiment, just records of who happened to get the "treatment". Lalonde's 1986 paper showed that many standard methods failed this test, which is why checking balance and overlap matters.
+
+See also: [Regression adjustment](#regression-adjustment), [Propensity score](#propensity-score), [NSW experiment data](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/data/nsw_experiment.csv)
+
+<a id="regression-adjustment"></a>
+
+### Regression adjustment
+
+_Concept, scikit-learn_
+
+The first fix: add the confounders to a linear regression alongside the treatment indicator, and read the treatment's coefficient as the effect "holding background constant". Including flags for zero earnings helps, because being unemployed is informative in itself.
+
+```python
+obs["unemployed74"] = (obs["earn74"] == 0).astype(int)
+obs["unemployed75"] = (obs["earn75"] == 0).astype(int)
+adjust = covariates + ["unemployed74", "unemployed75"]
+reg = LinearRegression().fit(obs[["treat"] + adjust], obs["earn78"])
+round(reg.coef_[0])                                           # 1066 (benchmark 1794)
+```
+
+Much better than −$8,498, but it assumes straight-line relationships and leans on survey people who look nothing like the trainees (extrapolation). Propensity-score methods compare like with like instead.
+
+See also: [Interpreting coefficients](#interpreting-coefficients), [Extrapolation](#extrapolation)
+
+<a id="propensity-score"></a>
+
+### Propensity score
+
+_Concept, scikit-learn_
+
+The probability of receiving the treatment given background: P(treated | covariates), usually estimated with logistic regression. Rosenbaum and Rubin (1983) showed that people with the same score have, on average, the same mix of background characteristics, so comparing treated and untreated people with **similar scores** works like a mini-experiment. Squared terms let the model capture curved relationships; the near-zero penalty (`C=1e6`) estimates probabilities rather than shrinking them.
+
+```python
+features = obs[adjust].copy()
+for col in ["age", "educ", "earn74", "earn75"]:
+    features[col + "_sq"] = obs[col] ** 2                    # allow curved relationships
+Zf = StandardScaler().fit_transform(features)
+ps_model = LogisticRegression(C=1e6, max_iter=5000).fit(Zf, obs["treat"])
+obs["ps"] = ps_model.predict_proba(Zf)[:, 1]
+obs.groupby("treat")["ps"].describe().round(3)                # survey people: mostly near 0
+```
+
+> **Watch out:** check that the propensity model has converged. A plain gradient descent stopped early (even after 20,000 steps) gives an IPW estimate of $1,514; L-BFGS converges in 34 iterations and gives $1,585. Different convergence, different causal answer.
+
+See also: [Logistic regression](#logistic-regression), [Overlap (common support)](#overlap-common-support), [Quasi-Newton methods (BFGS, L-BFGS)](#quasi-newton-methods-bfgs-l-bfgs)
+
+<a id="overlap-common-support"></a>
+
+### Overlap (common support)
+
+_Concept, matplotlib_
+
+Comparable people must exist in both groups: for every kind of treated person there should be untreated people with similar propensity scores. In the job-training data, most survey respondents have scores near 0 (they look nothing like the trainees), but several hundred overlap with the trained group, and those are the people the comparison relies on.
+
+```python
+fig, ax = plt.subplots(figsize=(8, 3.5))
+for t, label in [(0, "survey respondents"), (1, "trained")]:
+    ax.hist(obs.loc[obs["treat"] == t, "ps"], bins=40, alpha=0.6, density=True, label=label)
+ax.set(yscale="log", xlabel="propensity score", title="Overlap: comparable people exist for most trainees")
+ax.legend()
+```
+
+Where there's no overlap (treated people with no comparable controls, or vice versa), no method can estimate the effect honestly for them: say so, and consider restricting the population you report on.
+
+See also: [Propensity score](#propensity-score), [Causal assumptions](#causal-assumptions)
+
+<a id="propensity-score-matching"></a>
+
+### Propensity score matching
+
+_Concept, scikit-learn_
+
+Pair each treated person with the untreated person whose propensity score is closest, and use the match's outcome as the missing Y(0). The average of Y(1) − matched Y(0) estimates the effect on the treated (ATT). `NearestNeighbors` does the matching.
+
+```python
+from sklearn.neighbors import NearestNeighbors
+
+tr, co = obs[obs["treat"] == 1], obs[obs["treat"] == 0]
+nn = NearestNeighbors(n_neighbors=1).fit(co[["ps"]])
+_, idx = nn.kneighbors(tr[["ps"]])
+matched = co.iloc[idx[:, 0]]
+match_effect = (tr["earn78"].values - matched["earn78"].values).mean()
+round(match_effect), matched.index.nunique()                  # (1642, 111): 111 distinct survey people used
+```
+
+Matching is "with replacement" here: one survey respondent can stand in for several trainees. Check balance on the matched sample, just as after weighting.
+
+See also: [k-nearest neighbors (kNN)](#k-nearest-neighbors-knn), [Inverse probability weighting (IPW)](#inverse-probability-weighting-ipw)
+
+<a id="inverse-probability-weighting-ipw"></a>
+
+### Inverse probability weighting (IPW)
+
+_Concept, NumPy_
+
+Instead of picking matches, **re-weight** the untreated group so it looks like the treated group. To estimate the effect on the treated (ATT), each untreated person gets weight **score / (1 − score)**: people who look like trainees count a lot; people who look nothing like them count almost nothing. The **effective sample size** (ESS) shows how many people the weighted comparison is really worth.
+
+```python
+obs["weight"] = np.where(obs["treat"] == 1, 1, obs["ps"] / (1 - obs["ps"]))
+w_c = obs.loc[obs["treat"] == 0, "weight"]
+ipw_effect = (obs.loc[obs["treat"] == 1, "earn78"].mean()
+              - np.average(obs.loc[obs["treat"] == 0, "earn78"], weights=w_c))
+ess = w_c.sum() ** 2 / (w_c ** 2).sum()                     # Kish's effective sample size
+round(ipw_effect), round(ess)                                 # (1585, 107): 15,992 people count as ~107
+smd_table(obs, weights=obs["weight"]).round(2)                # after weighting: largest |SMD| about 0.11
+```
+
+| Method | Estimate | Error vs benchmark ($1,794) |
+| --- | --- | --- |
+| Naive comparison | −$8,498 | −$10,292 |
+| Regression adjustment | $1,066 | −$728 |
+| Propensity-score matching | $1,642 | −$152 |
+| Inverse probability weighting | $1,585 | −$209 |
+
+> **Watch out:** a very small ESS, or a few huge weights, means the estimate rests on a handful of people; trim or cap extreme scores and report how many people really drive the result.
+
+See also: [Love plot](#love-plot), [Bayesian bootstrap](#bayesian-bootstrap)
+
+<a id="love-plot"></a>
+
+### Love plot
+
+_matplotlib_
+
+A chart of each covariate's standardised mean difference **before and after** matching or weighting, with guide lines at ±0.1. It's the evidence that the comparison is now fair: every point after adjustment should sit inside the lines.
+
+```python
+def love_plot(smd_before, smd_after, title="Balance before and after weighting"):
+    order = smd_before.abs().sort_values().index
+    fig, ax = plt.subplots(figsize=(6, 4))
+    ax.scatter(smd_before[order], order, label="before", color="tab:red")
+    ax.scatter(smd_after[order], order, label="after", color="tab:green")
+    for x in (-0.1, 0.1):
+        ax.axvline(x, ls="--", color="grey")
+    ax.set(xlabel="standardised mean difference", title=title)
+    ax.legend()
+    return fig
+
+love_plot(smd_table(obs), smd_table(obs, weights=obs["weight"]))
+```
+
+See also: [Randomised experiments and balance](#randomised-experiments-and-balance)
+
+<a id="causal-assumptions"></a>
+
+### Causal assumptions
+
+_Concept_
+
+Every observational estimate rests on three assumptions to **state in your report**:
+
+1. **No unmeasured confounding** (unconfoundedness): everything that affects both treatment and outcome is measured. Here, previous earnings are crucial.
+2. **Overlap**: comparable people exist in both groups.
+3. **No interference** (part of SUTVA): one person's treatment doesn't change another's outcome.
+
+None can be fully tested, so argue for them and run a **sensitivity check**: leave out one confounder at a time and see how much the estimate moves.
+
+```python
+def ipw_without(drop):
+    keep = [c for c in features.columns if not any(c.startswith(d) for d in drop)]
+    Z_ = StandardScaler().fit_transform(features[keep])
+    p = LogisticRegression(C=1e6, max_iter=5000).fit(Z_, obs["treat"]).predict_proba(Z_)[:, 1]
+    w = (p / (1 - p))[obs["treat"].values == 0]
+    return obs.loc[obs["treat"] == 1, "earn78"].mean() - np.average(obs.loc[obs["treat"] == 0, "earn78"], weights=w)
+
+pd.Series({"all confounders": ipw_without([]), "without race": ipw_without(["black", "hispanic"]),
+           "without education": ipw_without(["educ", "nodegree"]),
+           "without previous earnings": ipw_without(["earn", "unemployed"])}).round(0)
+# all 1585 | without race 919 | without education 1226 | without previous earnings -3499
+```
+
+Dropping previous earnings flips the answer to −$3,499: a missing confounder can be as misleading as no adjustment at all.
+
+See also: [Overlap (common support)](#overlap-common-support), [Sensitivity analysis](#sensitivity-analysis)
+
+<a id="bayesian-bootstrap"></a>
+
+### Bayesian bootstrap
+
+_NumPy_
+
+Rubin's way to put a **posterior** on any estimate, including a causal effect: give every row a random weight drawn from a Dirichlet distribution (positive weights that sum to 1), recompute the estimate with those weights, and repeat thousands of times. The spread of the results is the posterior. (The classic bootstrap resamples rows; this version re-weights them smoothly.)
+
+```python
+def bayesian_bootstrap(estimator, df, draws=2000, seed=0):
+    rng = np.random.default_rng(seed)
+    return np.array([estimator(df, rng.dirichlet(np.ones(len(df)))) for _ in range(draws)])
+
+def ipw_att(df, w):
+    t = df["treat"].values == 1
+    w_c = w[~t] * df["weight"].values[~t]                     # random weights x IPW weights
+    return np.average(df["earn78"].values[t], weights=w[t]) - np.average(df["earn78"].values[~t], weights=w_c)
+
+post = bayesian_bootstrap(ipw_att, obs, draws=1000)
+post.mean().round(), np.percentile(post, [2.5, 97.5]).round(), (post > 0).mean().round(3)
+# about 1,589 | 95% credible interval about 160 to 3,060 | P(effect > 0) about 0.99
+```
+
+Unlike the single IPW number, this gives a decision-ready statement: "about a 99% probability the programme raised earnings". For simplicity it keeps the propensity scores fixed; refitting them inside each draw would widen the interval a little.
+
+See also: [Bootstrapping](#bootstrapping), [Credible interval](#credible-interval), [Inverse probability weighting (IPW)](#inverse-probability-weighting-ipw)
+
+<a id="did-x-cause-y-a-checklist-and-how-to-report-it"></a>
+
+### Did X cause Y? A checklist and how to report it
+
+_Concept_
+
+A reusable workflow for any causal question in a capstone:
+
+1. Define the **treatment**, the **outcome** and the **population** (and whether you want the ATE or the ATT).
+2. List the **confounders**, measured **before** treatment (never anything the treatment could have changed).
+3. Compute the naive estimate, then check **balance** (SMDs, love plot).
+4. Fit **propensity scores**; check **overlap** and convergence.
+5. **Match or weight**, then re-check balance (every |SMD| < 0.1).
+6. Estimate the effect **with uncertainty** (Bayesian bootstrap or confidence intervals), state the **assumptions**, and run a **sensitivity check**.
+
+A report that does this well reads like the course example: "Weighting the comparison group to match the trainees on age, education, background and previous earnings, we estimate the programme raised 1978 earnings by about $1,600 per participant (95% credible interval $160 to $3,060; probability of a positive effect about 99%). This assumes no unmeasured confounding; previous earnings are the key adjustment."
+
+See also: [Causal inference](#causal-inference), [Causal assumptions](#causal-assumptions)
+
 <a id="s38-capstone-playbook"></a>
 
 ## 38. Capstone playbook
@@ -7806,6 +8517,10 @@ _Concept_
 | "What should we recommend?"                     | Recommendation            | Item-based collaborative filtering     | Content-based, hybrid                                             | Sense-checked recommendations, hit rate            | Most popular items     |
 | "Which version is better, and how sure are we?" | Experiment / Bayesian     | Bayesian A/B test                      | Frequentist test (Unit 2)                                         | P(B better), credible interval                     | —                      |
 | "What happens if…?"                             | Simulation                | Monte Carlo                            | Discrete event, agent-based, system dynamics                      | Distribution of outcomes (percentiles)             | Current state          |
+| "Did X cause Y?" (no experiment) | Causal inference | Balance check + regression adjustment | Propensity-score matching or weighting | Effect with credible/confidence interval | Naive difference in means |
+| "What does this text say / which category is it?" | NLP | TF-IDF + logistic regression | Embeddings; a foundation model with evaluation | F1 / accuracy; groundedness for generated text | Majority class |
+| "What is in this image / sound?" | Deep learning | A pre-trained CNN (transfer learning) | Fine-tuning more layers | Accuracy, F1 | Majority class |
+| "Can the public use my model?" | Deployment and front end | Saved pipeline + Streamlit app | MLflow registry and an endpoint | Latency, errors, drift | — |
 
 See also: [Regression vs classification tasks](#regression-vs-classification-tasks), [Choosing a classification metric](#choosing-a-classification-metric), [Choosing a regression metric](#choosing-a-regression-metric)
 
@@ -7834,6 +8549,37 @@ _Concept, scikit-learn_
 | VAR                         | Multivariate forecasting | —                                | `maxlags`, `ic`                                    | Medium                      | Parameters grow fast                    |
 
 See also: [Scaling for distance-based models](#scaling-for-distance-based-models), [Standardize before regularizing](#standardize-before-regularizing)
+
+<a id="comparing-many-models-fairly"></a>
+
+### Comparing many models fairly
+
+_scikit-learn_
+
+The supervised model comparison lab's method, reusable in any capstone: the **same** split, the **same** metric(s), a **baseline**, and train vs test scores side by side so overfitting is visible. On the course's 401(k) data (predicting income in $1,000s), the baseline (training mean) had a test RMSE of about 24.1; linear regression about 20.3; a fully grown decision tree overfitted badly; and a **random forest with `min_samples_leaf=10`** won (about 18.8, roughly 22% better than the baseline). For the classification task (401(k) eligibility), **logistic regression with `class_weight="balanced"`** beat every ensemble on test F1 (about 0.60), with recall about 0.66 and no overfitting: the best model isn't always the most complex one.
+
+```python
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.dummy import DummyRegressor
+from sklearn.tree import DecisionTreeRegressor
+
+X_tr, X_te, y_tr, y_te = train_test_split(X_ab, y_ab, test_size=0.25, random_state=42)
+models = {"baseline (mean)": DummyRegressor(),
+          "linear regression": LinearRegression(),
+          "kNN (k=15)": Pipeline([("sc", StandardScaler()), ("knn", KNeighborsRegressor(15))]),
+          "decision tree": DecisionTreeRegressor(random_state=42),
+          "random forest (min_samples_leaf=10)": RandomForestRegressor(min_samples_leaf=10, random_state=42)}
+rows = []
+for name, model in models.items():
+    model.fit(X_tr, y_tr)
+    rmse = lambda X, y: metrics.root_mean_squared_error(y, model.predict(X))
+    rows.append({"model": name, "train RMSE": rmse(X_tr, y_tr), "test RMSE": rmse(X_te, y_te)})
+results = pd.DataFrame(rows).set_index("model").round(3)
+results["gap"] = results["test RMSE"] - results["train RMSE"]
+results.sort_values("test RMSE")                 # the unpruned tree: train RMSE 0, the largest gap
+```
+
+See also: [Null model (baseline) for regression](#null-model-baseline-for-regression), [Reading train vs test scores](#reading-train-vs-test-scores), [cross_validate() for several metrics at once](#cross-validate-multiple-metrics), [Model comparison lab (course)](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/labs/03%20-%20Supervised-Model-Comparison/lab-supervised-learning-model-comparison.ipynb), [EDA checklist by model type (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#eda-checklist-by-model-type)
 
 <a id="stage-6-build-a-pipeline-and-tune"></a>
 
@@ -8120,6 +8866,10 @@ Libraries evolve: parameters are renamed, defaults change and old functions are 
 | statsmodels  | `adfuller(...)` returns a tuple                 | Warns that its return format will change; p-value is still the second value | 0.15                                  |
 | PyMC         | `import pymc3 as pm`                            | `import pymc as pm`                                                         | Renamed at version 4                  |
 | Google GenAI | `google-generativeai` package                   | `google-genai` (`from google import genai`)                                 | 2025                                  |
+| MLflow | `mlruns/` folder store; `log_model(artifact_path=...)`; Staging/Production stages; pickle | SQLite tracking store; `log_model(name=...)`; aliases (`@champion`); skops | MLflow 3 |
+| OpenAI / Azure | `AzureOpenAI(api_version=...)` with Chat Completions | `OpenAI(base_url=<resource>/openai/v1/)` with the Responses API and Entra ID tokens | 2025–26 |
+| Streamlit | Reading `st.secrets` in an app with no secrets file | Raises `StreamlitSecretNotFoundError`; read secrets through a small helper with a default | Current versions |
+| Keras | Keras 2, TensorFlow only | Keras 3 runs on TensorFlow, JAX or PyTorch (`KERAS_BACKEND`) | Keras 3 |
 
 ```python
 import sklearn, pandas, statsmodels
@@ -8146,14 +8896,1385 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 
 ---
 
+<a id="s39-neural-networks"></a>
+
+## 39. Neural networks
+
+_The models behind image recognition, speech, translation and today's large language models. How a single artificial neuron extends logistic regression; how layers of neurons, activation functions, a loss and backpropagation turn into a trainable network; how to build one with scikit-learn and Keras; how to stop it overfitting; and which architectures suit images (CNNs), sequences (RNNs) and text (transformers). For tabular capstone data, compare any network against gradient boosting before choosing it._
+
+**In your capstone:** reach for a neural network when your data is images, audio, text or very large, or when you're fine-tuning a pre-trained model; for ordinary tabular data, treat a network as one more candidate and keep it only if it beats a tuned gradient-boosting model on the same split.
+
+<a id="neural-network"></a>
+
+### Neural network
+
+_Concept_
+
+A model built from layers of simple units (**neurons**), each computing a weighted sum of its inputs and passing it through a non-linear **activation function**. Stacking layers lets the network learn complicated, non-linear relationships and its own features: early layers in an image network learn edges, later ones learn shapes and objects. Training finds the weights by **gradient descent**, using **backpropagation** to compute the gradients.
+
+| Use a neural network when… | Prefer simpler models when… |
+| --- | --- |
+| Data are images, audio, text or sequences | Data are a modest table of rows and columns |
+| There are many examples (tens of thousands or more) | There are a few thousand rows or fewer |
+| A pre-trained model can be reused (transfer learning) | Interpretability is essential |
+| Accuracy matters more than training cost | You need fast, cheap training and tuning |
+
+On typical tabular data, tuned gradient-boosting models usually match or beat neural networks with far less effort.
+
+See also: [Artificial neuron (perceptron)](#artificial-neuron-perceptron), [Gradient descent](#gradient-descent), [Transformer and attention](#transformer-and-attention), [XGBoost](#xgboost)
+
+<a id="artificial-neuron-perceptron"></a>
+
+### Artificial neuron (perceptron)
+
+_Concept, NumPy_
+
+The building block of a network: multiply each input by a **weight**, add a **bias**, and pass the total through an **activation function**: output = f(w₁x₁ + w₂x₂ + … + b). With a sigmoid activation, one neuron **is** logistic regression; with no activation, it's linear regression. The **perceptron** (Rosenblatt, 1958) was the first such unit, with a step activation. A single neuron can only draw a straight-line boundary, so it can't solve problems like XOR; hidden layers fix that.
+
+```python
+def neuron(x, w, b, activation=lambda z: 1 / (1 + np.exp(-z))):
+    """One neuron: weighted sum plus bias, then an activation (sigmoid by default)."""
+    return activation(x @ w + b)
+
+x = np.array([0.5, -1.2, 3.0])                 # one example with three features
+w = np.array([0.8, 0.1, -0.4])                 # one weight per feature
+neuron(x, w, b=0.2)                            # about 0.33: a probability, as in logistic regression
+```
+
+See also: [Logistic regression](#logistic-regression), [Activation functions](#activation-functions)
+
+<a id="activation-functions"></a>
+
+### Activation functions
+
+_Concept, NumPy_
+
+The non-linear function each neuron applies to its weighted sum. Without one, any number of layers collapses into a single linear model.
+
+| Activation | Formula | Output range | Typical use |
+| --- | --- | --- | --- |
+| **ReLU** | max(0, z) | 0 to ∞ | Hidden layers (the default: fast, avoids vanishing gradients) |
+| **Sigmoid** | 1 / (1 + e⁻ᶻ) | 0 to 1 | Output layer for binary classification |
+| **Tanh** | (eᶻ − e⁻ᶻ) / (eᶻ + e⁻ᶻ) | −1 to 1 | Hidden layers in older and recurrent networks |
+| **Softmax** | eᶻᵢ / Σ eᶻⱼ | 0 to 1, sums to 1 | Output layer for multiclass classification |
+| **Linear** (none) | z | −∞ to ∞ | Output layer for regression |
+
+```python
+z = np.linspace(-4, 4, 200)
+fig, ax = plt.subplots(figsize=(7, 3.5))
+for name, f in {"ReLU": lambda z: np.maximum(0, z), "sigmoid": lambda z: 1 / (1 + np.exp(-z)),
+                "tanh": np.tanh}.items():
+    ax.plot(z, f(z), label=name)
+ax.set(title="Common activation functions", xlabel="weighted sum z", ylim=(-1.2, 4))
+ax.legend()
+
+def softmax(scores):
+    e = np.exp(scores - scores.max())          # subtract the max for numerical stability
+    return e / e.sum()
+
+softmax(np.array([2.0, 1.0, 0.1])).round(3)    # [0.659, 0.242, 0.099]: class probabilities
+```
+
+See also: [Logistic (sigmoid) function](#logistic-sigmoid-function), [Multinomial logistic regression](#multinomial-logistic-regression)
+
+<a id="multilayer-perceptron-mlp"></a>
+
+### Multilayer perceptron (MLP)
+
+_Concept_
+
+The standard "fully connected" network: an **input layer** (one value per feature), one or more **hidden layers** of neurons, and an **output layer** (one neuron for regression or binary classification, one per class with softmax for multiclass). Every neuron connects to every neuron in the next layer, so the number of **parameters** grows quickly: a layer with 30 inputs and 64 neurons has 30 × 64 weights + 64 biases = 1,984 parameters.
+
+Depth (more layers) lets a network build features of features; width (more neurons per layer) lets each layer represent more patterns. With enough hidden neurons, even one hidden layer can approximate any smooth function (the **universal approximation theorem**), but that says nothing about how much data it needs to learn it.
+
+See also: [Neural network](#neural-network), [MLPClassifier and MLPRegressor](#mlpclassifier-and-mlpregressor)
+
+<a id="forward-pass-loss-and-backpropagation"></a>
+
+### Forward pass, loss and backpropagation
+
+_Concept, NumPy_
+
+Training repeats four steps. (1) **Forward pass**: push a batch of examples through the layers to get predictions. (2) **Loss**: measure how wrong they are: mean squared error for regression, **cross-entropy** (log loss) for classification. (3) **Backpropagation**: apply the chain rule backwards through the layers to get the gradient of the loss with respect to every weight. (4) **Update**: move every weight a small step against its gradient (gradient descent). This tiny network learns XOR, which no single neuron can:
+
+```python
+rng = np.random.default_rng(0)
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]], dtype=float)
+y = np.array([[0], [1], [1], [0]], dtype=float)                 # XOR: not linearly separable
+W1, b1 = rng.normal(size=(2, 8)), np.zeros(8)                    # 2 inputs -> 8 hidden neurons
+W2, b2 = rng.normal(size=(8, 1)), np.zeros(1)                    # 8 hidden -> 1 output
+sigmoid = lambda z: 1 / (1 + np.exp(-z))
+
+for epoch in range(5000):
+    h = np.tanh(X @ W1 + b1)                                     # 1. forward pass: hidden layer
+    p = sigmoid(h @ W2 + b2)                                     #    output probability
+    loss = -np.mean(y * np.log(p) + (1 - y) * np.log(1 - p))     # 2. cross-entropy loss
+    d_out = (p - y) / len(X)                                     # 3. backpropagation (chain rule)
+    d_W2, d_b2 = h.T @ d_out, d_out.sum(axis=0)
+    d_h = d_out @ W2.T * (1 - h ** 2)                            #    tanh'(z) = 1 - tanh(z)^2
+    d_W1, d_b1 = X.T @ d_h, d_h.sum(axis=0)
+    for param, grad in [(W1, d_W1), (b1, d_b1), (W2, d_W2), (b2, d_b2)]:
+        param -= 1.0 * grad                                      # 4. gradient descent update (learning rate 1.0)
+
+p.round(2).ravel(), round(loss, 4)              # [0, 1, 1, 0], loss about 0.0002
+```
+
+Libraries do steps 2–4 for you (automatic differentiation), but the logic is exactly this. The loss surface of a network is **not convex**: with only 4 hidden neurons, about 1 random start in 20 gets stuck predicting 0.5 for two of the cases (a local minimum), while with 8 neurons all 20 starts succeed. Extra neurons and random restarts are the practical defences.
+
+See also: [Gradient descent](#gradient-descent), [Log loss](#log-loss-binary-cross-entropy), [Vanishing and exploding gradients](#vanishing-and-exploding-gradients)
+
+<a id="epochs-batches-and-optimizers"></a>
+
+### Epochs, batches and optimizers
+
+_Concept_
+
+The vocabulary of training. A **batch** (or mini-batch) is the group of examples used for one weight update; an **epoch** is one full pass through the training data; so with 1,000 rows and a batch size of 32, one epoch is about 32 updates. The **learning rate** sets the step size. The **optimizer** decides how gradients become updates: plain **SGD**, **SGD with momentum** (keeps moving in a consistent direction), or **Adam** (adapts each weight's step size, and the usual default).
+
+Watch the **training and validation loss by epoch**: both falling is learning; validation loss rising while training loss keeps falling is overfitting, the moment to stop.
+
+See also: [Stochastic gradient descent (SGD)](#stochastic-gradient-descent-sgd), [Learning rate (step size, α)](#learning-rate-step-size), [Adam, RMSProp and IRLS](#adam-rmsprop-and-irls)
+
+<a id="vanishing-and-exploding-gradients"></a>
+
+### Vanishing and exploding gradients
+
+_Concept_
+
+In deep networks, backpropagation multiplies many small derivatives together, so gradients reaching the early layers can shrink towards zero (**vanishing**: those layers stop learning) or grow out of control (**exploding**: training diverges, losses become NaN). Remedies: **ReLU** activations instead of sigmoid or tanh in hidden layers, sensible weight initialisation (libraries do this), **batch normalisation**, residual connections, gradient clipping, and a smaller learning rate.
+
+See also: [Activation functions](#activation-functions), [Learning rate (step size, α)](#learning-rate-step-size)
+
+<a id="mlpclassifier-and-mlpregressor"></a>
+
+### MLPClassifier and MLPRegressor
+
+_scikit-learn_
+
+scikit-learn's multilayer perceptrons: fine for small and medium tabular problems and for learning the ideas, with the same `fit`/`predict` interface as every other model. Networks are very sensitive to feature scale, so **always scale inside a pipeline**. Key settings: `hidden_layer_sizes` (one number per hidden layer), `activation` (`"relu"` default), `alpha` (L2 penalty), `learning_rate_init`, `max_iter` and `early_stopping=True` (holds out 10% of the training data and stops when its score stops improving).
+
+```python
+from sklearn.datasets import load_breast_cancer
+from sklearn.neural_network import MLPClassifier
+
+X, y = load_breast_cancer(return_X_y=True, as_frame=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y, random_state=42)
+
+mlp = Pipeline([
+    ("sc", StandardScaler()),
+    ("mlp", MLPClassifier(hidden_layer_sizes=(32, 16), alpha=1e-3, early_stopping=True,
+                          max_iter=1000, random_state=42)),
+])
+mlp.fit(X_train, y_train)
+mlp.score(X_test, y_test)                       # about 0.95 accuracy
+
+fig, ax = plt.subplots(figsize=(6, 3.5))
+ax.plot(mlp.named_steps["mlp"].loss_curve_)     # training loss by epoch
+ax.set(xlabel="epoch", ylabel="training loss", title="The loss falls as the network learns")
+
+params = {"mlp__hidden_layer_sizes": [(16,), (32, 16)], "mlp__alpha": [1e-4, 1e-2]}
+gs = GridSearchCV(mlp, params, cv=5, n_jobs=-1).fit(X_train, y_train)
+gs.best_params_
+```
+
+> **Watch out:** a `ConvergenceWarning` means training stopped at `max_iter` before the loss settled: raise `max_iter`, scale the features, or adjust the learning rate. Results change with `random_state`, because the starting weights are random.
+
+See also: [Pipeline + GridSearchCV](#pipeline-gridsearchcv), [Scaling for distance-based models](#scaling-for-distance-based-models), [Overfitting in neural networks](#overfitting-in-neural-networks), [Standardization / feature scaling (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#standardization-feature-scaling)
+
+<a id="overfitting-in-neural-networks"></a>
+
+### Overfitting in neural networks
+
+_Concept_
+
+Networks have many parameters, so they overfit easily. The standard controls:
+
+- **Early stopping**: hold out validation data and stop when its loss stops improving (keep the best weights).
+- **Dropout**: during training, randomly switch off a share of neurons (e.g. 20–50%) in each update, so the network can't rely on any one of them.
+- **L2 weight decay** (`alpha` in scikit-learn, `kernel_regularizer` in Keras): the same penalty as Ridge.
+- **More data or data augmentation**: for images, flips, crops and rotations create new training examples.
+- **A smaller network**: fewer layers or neurons.
+
+Judge every change on the **validation** loss curve, never on the training loss.
+
+See also: [Overfitting](#overfitting), [Ridge regression (L2)](#ridge-regression-l2), [Three-way split (validation set)](#three-way-split-validation-set)
+
+<a id="building-a-network-in-keras"></a>
+
+### Building a network in Keras
+
+_Keras_
+
+Keras is the most widely taught deep-learning library: you stack layers, choose a loss and an optimizer, and call `fit`. Keras 3 runs on TensorFlow, JAX or PyTorch (`pip install keras tensorflow` is the usual setup). The steps are always the same: **build** (layers), **compile** (loss, optimizer, metrics), **fit** (with validation data and early stopping), **evaluate**, **predict**.
+
+```python
+import keras
+from keras import layers
+
+keras.utils.set_random_seed(42)                                      # reproducible weights and shuffling
+sc = StandardScaler().fit(X_train)                                   # fit scaling on training data only
+X_tr, X_te = sc.transform(X_train), sc.transform(X_test)
+
+model = keras.Sequential([
+    keras.Input(shape=(X_tr.shape[1],)),
+    layers.Dense(32, activation="relu"),
+    layers.Dropout(0.3),                                             # regularisation
+    layers.Dense(16, activation="relu"),
+    layers.Dense(1, activation="sigmoid"),                           # binary output: a probability
+])
+model.compile(optimizer=keras.optimizers.Adam(learning_rate=1e-3),
+              loss="binary_crossentropy", metrics=["accuracy"])
+model.summary()                                                      # layers and parameter counts
+
+stop = keras.callbacks.EarlyStopping(monitor="val_loss", patience=10, restore_best_weights=True)
+history = model.fit(X_tr, y_train, validation_split=0.2, epochs=200, batch_size=32,
+                    callbacks=[stop], verbose=0)
+model.evaluate(X_te, y_test, verbose=0)                              # [test loss, test accuracy about 0.97]
+probabilities = model.predict(X_te, verbose=0).ravel()
+
+pd.DataFrame(history.history)[["loss", "val_loss"]].plot(
+    title="Training vs validation loss", xlabel="epoch", figsize=(6, 3.5))
+```
+
+For multiclass problems use `Dense(n_classes, activation="softmax")` with `loss="sparse_categorical_crossentropy"`; for regression use `Dense(1)` (no activation) with `loss="mse"`. Save a trained model with `model.save("model.keras")` and reload it with `keras.models.load_model()`.
+
+See also: [Overfitting in neural networks](#overfitting-in-neural-networks), [Epochs, batches and optimizers](#epochs-batches-and-optimizers)
+
+<a id="convolutional-neural-networks-cnns"></a>
+
+### Convolutional neural networks (CNNs)
+
+_Concept, Keras_
+
+Networks designed for **images** (and other grid-like data). Instead of connecting every pixel to every neuron, a **convolutional layer** slides small learned filters (e.g. 3 × 3) across the image, so the same edge or texture detector works anywhere in the picture; **pooling** layers shrink the image while keeping the strongest signals; a final dense layer classifies. Far fewer parameters than an MLP on raw pixels, and they respect the fact that neighbouring pixels belong together.
+
+```python
+from sklearn.datasets import load_digits
+
+digits = load_digits()                                               # 1,797 tiny 8 x 8 images of digits
+images = (digits.images / 16.0)[..., np.newaxis]                     # scale to 0-1, add a channel axis
+Xi_train, Xi_test, yi_train, yi_test = train_test_split(images, digits.target, test_size=0.25,
+                                                        stratify=digits.target, random_state=42)
+cnn = keras.Sequential([
+    keras.Input(shape=(8, 8, 1)),
+    layers.Conv2D(16, kernel_size=3, activation="relu", padding="same"),   # 16 learned 3 x 3 filters
+    layers.MaxPooling2D(pool_size=2),                                       # 8 x 8 -> 4 x 4
+    layers.Flatten(),
+    layers.Dense(10, activation="softmax"),                                 # one output per digit
+])
+cnn.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+cnn.fit(Xi_train, yi_train, epochs=30, batch_size=32, validation_split=0.2, verbose=0)
+cnn.evaluate(Xi_test, yi_test, verbose=0)                            # test accuracy about 0.97
+```
+
+For real photos, start from a **pre-trained** CNN (transfer learning) rather than training from scratch.
+
+See also: [Transfer learning and pre-trained models](#transfer-learning-and-pre-trained-models), [Building a network in Keras](#building-a-network-in-keras)
+
+<a id="recurrent-neural-networks-and-sequence-models"></a>
+
+### Recurrent neural networks and sequence models
+
+_Concept_
+
+Networks for **ordered data** (text, time series, audio). A **recurrent neural network (RNN)** reads a sequence one step at a time, carrying a hidden "memory" forward; **LSTM** and **GRU** layers add gates that decide what to remember and forget, which helps with long sequences. For text, **transformers** (which look at every position at once using attention) have largely replaced RNNs; for business forecasting, classical models and gradient boosting on lag features remain strong baselines, so compare against them before using an LSTM.
+
+See also: [Transformer and attention](#transformer-and-attention), [Time series](#time-series), [Naive and seasonal naive forecasts](#naive-and-seasonal-naive-forecasts)
+
+<a id="transfer-learning-and-pre-trained-models"></a>
+
+### Transfer learning and pre-trained models
+
+_Concept_
+
+Starting from a network already trained on a huge dataset (images, text) instead of from random weights. Either use it as a **feature extractor** (keep its learned layers frozen and train only a new final layer on your data) or **fine-tune** it (continue training some or all layers with a small learning rate). It's how most real projects use deep learning: a few hundred labelled examples can be enough. Large language models are the extreme case: fine-tuning methods such as **LoRA** train small add-on matrices instead of the whole model.
+
+See also: [Fine-tuning and LoRA](#fine-tuning-and-lora), [Embedding](#embedding), [How LLMs are trained](#how-llms-are-trained)
+
+<a id="neural-networks-in-a-capstone"></a>
+
+### Neural networks in a capstone
+
+_Concept_
+
+A practical checklist if a network is a candidate model:
+
+1. Build a **baseline** and a tuned tree-based model first; the network has to beat them on the same validation split.
+2. **Scale** inputs (inside a pipeline, or fit the scaler on training data only) and encode categories.
+3. Start **small** (one or two hidden layers), use **early stopping**, and plot training vs validation loss.
+4. Set **seeds** and report results across a few seeds: networks vary run to run.
+5. Use **pre-trained** models for images and text rather than training from scratch.
+6. Explain the model with model-agnostic tools (permutation importance, SHAP) and say what it can't explain.
+7. Mind the **cost**: training time, compute, and for large models, inference cost in production.
+
+See also: [Model selection cheat sheet](#model-selection-cheat-sheet), [Permutation importance](#permutation-importance), [SHAP (SHapley Additive exPlanations)](#shap-shapley-additive-explanations), [EDA checklist by model type (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#eda-checklist-by-model-type)
+
+---
+
+<a id="s40-nlp-and-foundation-models"></a>
+
+## 40. NLP and foundation models
+
+_Working with text: turning language into numbers (bag of words, TF-IDF, embeddings), measuring meaning with cosine similarity, and using pre-trained foundation models on Microsoft Foundry: deployments, keyless access, choosing a model, evaluating outputs for quality and safety, and deciding between prompting, retrieval (RAG) and fine-tuning with LoRA. Cloud examples need a Foundry project; everything else runs locally._
+
+**In your capstone:** if your data includes text (reviews, tickets, emails, descriptions), start with TF-IDF and a simple classifier as the baseline, move to embeddings or a foundation model only when your evaluation shows it does better, and build an evaluation set before you change prompts, models or fine-tune.
+
+<a id="the-nlp-workflow"></a>
+
+### The NLP workflow
+
+_Concept_
+
+Every text project follows the same pipeline: **raw text** (a *corpus*: a collection of documents such as emails, reviews or posts) → **cleaning** (remove duplicates and personal data) → **tokenisation** (split into the units a model knows, then into numbers) → **model** (usually a pre-trained model, used as-is or adapted) → **application** (search, classify, summarise, translate, extract).
+
+Pre-trained models changed the economics. Traditional NLP trained a custom model per task from thousands of labelled examples and weeks of feature engineering; modern NLP starts from a pre-trained model that needs few or no labelled examples, gets to a prototype in hours, and charges per token. The effort shifts from **building** models to **choosing, evaluating and governing** them.
+
+See also: [Token](#token), [Generative AI (GenAI)](#generative-ai-genai), [Where GenAI helps in the data science lifecycle](#where-genai-helps-in-the-data-science-lifecycle)
+
+<a id="tokenisation-and-token-cost"></a>
+
+### Tokenisation and token cost
+
+_Python, tiktoken_
+
+A tokenizer splits text into tokens (often pieces of words) and maps them to integer IDs. Use the tokenizer that matches your model: different models split differently (BERT adds `[CLS]` and `[SEP]` markers), and different **languages** use different numbers of tokens for the same meaning; long compound words such as German *Kontoeröffnungsformular* become several tokens. Since you pay per token, tokens drive cost and latency.
+
+```python
+import tiktoken                                   # pip install tiktoken (downloads its vocabulary on first use)
+
+enc = tiktoken.get_encoding("o200k_base")         # the tokenizer family used by recent OpenAI models
+for text in ["I love learning about text.", "Ich lerne gerne etwas über Texte.", "Kontoeröffnungsformular"]:
+    ids = enc.encode(text)
+    print(f"{len(ids):>2} tokens: {[enc.decode([i]) for i in ids]}")
+```
+
+See also: [Token](#token), [Context window](#context-window)
+
+<a id="bag-of-words-and-tf-idf"></a>
+
+### Bag of words and TF-IDF
+
+_scikit-learn_
+
+The two classic ways to turn documents into numbers. **Bag of words** (`CountVectorizer`) counts each vocabulary word in each document. **TF-IDF** (`TfidfVectorizer`) weights those counts by how **distinctive** a word is: term frequency × inverse document frequency, so words in every document count little and rare words count a lot. Both are fast, cheap, transparent and run on a laptop, which makes them the right **baseline** for any text task. `ngram_range=(1, 2)` adds two-word phrases, which captures a little word order.
+
+```python
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+corpus = ["I love learning about text.", "Text models are fun.", "I love learning at work. Learning is fun!"]
+cv = CountVectorizer()
+bow = pd.DataFrame(cv.fit_transform(corpus).toarray(), columns=cv.get_feature_names_out())
+tfidf = TfidfVectorizer()
+weights = pd.DataFrame(tfidf.fit_transform(corpus).toarray(), columns=tfidf.get_feature_names_out()).round(2)
+bow                                               # counts: "learning" appears twice in document 3
+weights                                           # "about" scores highest in document 1: only it uses the word
+```
+
+See also: [The negation problem](#the-negation-problem), [Text classification with TF-IDF](#text-classification-with-tf-idf)
+
+<a id="the-negation-problem"></a>
+
+### The negation problem
+
+_scikit-learn_
+
+The blind spot of counting methods: they ignore word order and context. "I am happy with this product" and "I am not happy with this product" have nearly identical word counts, so their vectors point in almost the same direction; likewise "the supplier agreed to pay the manufacturer" and "the manufacturer agreed to pay the supplier" contain exactly the same words. Contextual **embeddings**, which read each word in the context of the whole sentence, were built to fix this.
+
+```python
+def cosine(a, b):
+    return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
+
+pair = ["I am happy with this product.", "I am not happy with this product."]
+v = CountVectorizer().fit_transform(pair).toarray()
+round(cosine(v[0], v[1]), 3)                      # about 0.91: opposite meanings, near-identical vectors
+
+swap = ["The supplier agreed to pay the manufacturer", "The manufacturer agreed to pay the supplier"]
+v = CountVectorizer().fit_transform(swap).toarray()
+round(cosine(v[0], v[1]), 3)                      # 1.0: who pays whom is invisible
+```
+
+See also: [Embedding](#embedding), [Cosine similarity and semantic search](#cosine-similarity-and-semantic-search)
+
+<a id="text-classification-with-tf-idf"></a>
+
+### Text classification with TF-IDF
+
+_scikit-learn_
+
+The standard baseline for labelling text (sentiment, ticket category, spam): a pipeline of `TfidfVectorizer` and a linear classifier. It trains in seconds, gives interpretable word weights, and is often hard to beat by much. Evaluate it exactly like any classifier (split, cross-validate, confusion matrix), and use it as the yardstick for any embedding or LLM approach.
+
+```python
+reviews = pd.DataFrame({
+    "text": ["Great product, works perfectly", "Terrible, broke after a day", "Love it, highly recommend",
+             "Awful quality, very disappointed", "Excellent value and fast delivery", "Stopped working, waste of money",
+             "Really happy with this purchase", "Not worth it, poor build", "Fantastic, exactly as described",
+             "Disappointing and cheap feel", "Works great, would buy again", "Broken on arrival, avoid"],
+    "positive": [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+})
+text_clf = Pipeline([("tfidf", TfidfVectorizer(ngram_range=(1, 2))),
+                     ("lr", LogisticRegression(max_iter=1000))])
+text_clf.fit(reviews["text"], reviews["positive"])
+text_clf.predict(["Absolutely love it", "It broke and I want a refund"])    # [1, 0]
+
+words = text_clf.named_steps["tfidf"].get_feature_names_out()
+coefs = pd.Series(text_clf.named_steps["lr"].coef_[0], index=words)
+coefs.sort_values().iloc[[0, 1, -2, -1]]          # most negative and most positive words
+```
+
+> **Watch out:** fit the vectorizer inside the pipeline, so its vocabulary and IDF weights are learned from training text only. With real data, use hundreds of labelled examples or more and a held-out test set; this tiny example only shows the mechanics.
+
+See also: [Pipeline](#pipelines-in-tuning), [Classification metrics](#confusion-matrix), [Validating GenAI classifications](#validating-genai-classifications), [Standardise text (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#standardise-text-spacing-case-and-punctuation), [re (regular expressions) (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#re-regular-expressions)
+
+<a id="static-and-contextual-embeddings"></a>
+
+### Static and contextual embeddings
+
+_Concept_
+
+Embeddings place words or whole texts as points in a "meaning space" with hundreds to thousands of dimensions, learned from data, so that similar meanings land close together. **Static** embeddings (Word2Vec, GloVe) give each word one fixed vector, so "bank" is the same in "river bank" and "bank account". **Contextual** embeddings (BERT, and the embedding models in Foundry) produce a vector that depends on the whole sentence, so they can see negation and word order. More context means more meaning captured, and more compute and cost.
+
+| Method | Captures | Misses | Cost | Good for |
+| --- | --- | --- | --- | --- |
+| Bag of words | Which words appear | Order, negation, meaning | Very low; runs on a laptop | Baseline classifiers, keyword features |
+| TF-IDF | Distinctive words | Order, negation, meaning | Very low | Keyword search, topic classification |
+| Word2Vec | Word similarity | Order, multiple meanings | Low after training | Similar-word lookup, custom vocabularies |
+| Contextual embeddings | Meaning in context | Facts not in the text; can mirror training bias | Per-token API cost or GPU | Semantic search, RAG, clustering, robust classification |
+
+Start at the top of the table, and move down only when the cheaper method fails on your evaluation data.
+
+See also: [Embedding](#embedding), [The negation problem](#the-negation-problem)
+
+<a id="cosine-similarity-and-semantic-search"></a>
+
+### Cosine similarity and semantic search
+
+_NumPy, Python_
+
+Cosine similarity compares the **direction** of two vectors (1 = same direction, 0 = unrelated, −1 = opposite), ignoring their length. With modern text embeddings, scores mostly sit between 0 and 1, so compare **rankings**, not absolute values. **Semantic search** embeds every document once, embeds the query, and returns the documents with the highest cosine similarity, so "the item stopped working" finds "it broke after two days" without sharing a word.
+
+```python
+def search(query_vec, doc_vecs, docs, top=3):
+    """Rank documents by cosine similarity to a query vector."""
+    scores = doc_vecs @ query_vec / (np.linalg.norm(doc_vecs, axis=1) * np.linalg.norm(query_vec))
+    return pd.DataFrame({"document": docs, "similarity": scores}).nlargest(top, "similarity").round(3)
+
+docs = reviews["text"].tolist()
+vec = TfidfVectorizer().fit(docs)                 # locally, TF-IDF vectors stand in for embeddings
+search(vec.transform(["works great"]).toarray()[0], vec.transform(docs).toarray(), docs)
+```
+
+With a Foundry embedding deployment, replace the TF-IDF vectors with `embed(texts)` from [Calling Foundry models from Python](#calling-foundry-models-from-python); the search code stays the same, and it now matches meaning rather than shared words.
+
+See also: [Cosine similarity](#cosine-similarity), [Retrieval-augmented generation (RAG)](#retrieval-augmented-generation-rag)
+
+<a id="microsoft-foundry-projects-and-deployments"></a>
+
+### Microsoft Foundry: projects and deployments
+
+_Concept_
+
+Microsoft Foundry is Azure's platform for building with foundation models. A **resource** sets the region, networking, quota and billing; **projects** inside it hold your datasets, evaluations, fine-tuning jobs, agents and access rights. The **model catalog** lists models from OpenAI, Microsoft, Meta, Mistral, Cohere, DeepSeek, Anthropic and open-weight providers, each with a model card. A **model** is what you pick from the catalog; a **deployment** is your named, configured instance of it, and your code uses the **deployment name**. Playgrounds let you compare models on the same prompt before writing code.
+
+| Deployment type | Where prompts are processed | Billing | Use it when |
+| --- | --- | --- | --- |
+| Global Standard | Any Azure region worldwide | Per token | No residency constraint; best availability |
+| Data Zone Standard | Within a data zone (e.g. EU or US) | Per token | Data must stay in a geography |
+| Standard (regional) | The resource's region | Per token | Strict regional processing, where offered |
+| Provisioned (PTU) | Region, global or data zone | Reserved capacity | Predictable high volume and latency |
+| Developer (fine-tuned) | Global | Per token, no hosting fee | Testing a fine-tuned model (expires after 24 h) |
+
+> **Watch out:** check each model's available deployment types against your data-residency rules before you deploy. Model names, regions and deployment options change often; confirm them in the portal and the documentation for your date.
+
+See also: [Calling Foundry models from Python](#calling-foundry-models-from-python), [Data privacy with GenAI tools](#data-privacy-with-genai-tools)
+
+<a id="calling-foundry-models-from-python"></a>
+
+### Calling Foundry models from Python
+
+_Python, azure-ai-projects, openai_
+
+Two clients do everything: the **project client** (`azure-ai-projects`) for deployments, datasets, evaluations and fine-tuning, and an **OpenAI client** pointed at the resource's v1 endpoint for responses and embeddings. Access is **keyless**: Microsoft Entra ID (sign in with `az login` locally, a managed identity in production) issues short-lived tokens, and the "Foundry User" role on the project grants access. No API keys in notebooks, Git or chat; deployment names live in a `.env` file.
+
+```python
+# pip install azure-ai-projects azure-identity openai python-dotenv  (needs a Foundry project and az login)
+import os
+from dotenv import load_dotenv
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from azure.ai.projects import AIProjectClient
+from openai import OpenAI
+
+load_dotenv()
+PROJECT_ENDPOINT = os.environ["FOUNDRY_PROJECT_ENDPOINT"]   # https://<resource>.services.ai.azure.com/api/projects/<project>
+EMBED, SMALL_CHAT = os.environ["EMBEDDING_DEPLOYMENT"], os.environ["SMALL_CHAT_DEPLOYMENT"]
+
+credential = DefaultAzureCredential()
+project = AIProjectClient(endpoint=PROJECT_ENDPOINT, credential=credential)
+for d in project.deployments.list():
+    print(d.name, d.model_name)                                     # what's deployed in this project
+
+resource = PROJECT_ENDPOINT.split("/api/projects/")[0]
+token = get_bearer_token_provider(credential, "https://ai.azure.com/.default")
+client = OpenAI(base_url=f"{resource}/openai/v1/", api_key=token)   # v1 endpoint: no api_version
+
+r = client.responses.create(model=SMALL_CHAT, input="Reply with the single word: ready", max_output_tokens=500)
+r.output_text, r.usage.input_tokens, r.usage.output_tokens         # answer, plus the tokens you pay for
+
+def embed(texts, model=EMBED):
+    """An (n, d) array of contextual embeddings for a list of strings."""
+    resp = client.embeddings.create(model=model, input=texts)
+    return np.array([d.embedding for d in resp.data])
+```
+
+> **Watch out:** `model=` takes your **deployment name**, not the catalog model name. Older tutorials pass an `api_version` and use the Chat Completions API; the v1 endpoint and the Responses API replace them, so check the current documentation if older code fails.
+
+See also: [Calling an LLM from Python](#calling-an-llm-from-python), [Choosing a foundation model](#choosing-a-foundation-model), [Keeping API keys secret (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#keeping-api-keys-secret), [Environment variables and .env files (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#environment-variables-and-env-files)
+
+<a id="choosing-a-foundation-model"></a>
+
+### Choosing a foundation model
+
+_Concept_
+
+Pick a model with a rubric, not a leaderboard: **task fit** (does it handle your task and format?), **quality** (on your own evaluation data), **latency**, **cost** (tokens in and out, including hidden "reasoning" tokens), **language** coverage, and **governance** (data residency, licensing, safety features). Run the same test inputs through a small and a large model and record output, latency and token usage; a smaller, cheaper model is often good enough, and a simple TF-IDF classifier may be better still for a narrow labelling task.
+
+See also: [Model selection cheat sheet](#model-selection-cheat-sheet), [Evaluating LLM outputs](#evaluating-llm-outputs)
+
+<a id="evaluating-llm-outputs"></a>
+
+### Evaluating LLM outputs
+
+_Concept_
+
+You can't tell whether a prompt change, a new model or fine-tuning helped without a yardstick, so **evaluation comes first**. Five layers, from broad and cheap to narrow and trusted:
+
+1. **Public benchmarks**: shortlist models (but many are "solved", may have leaked into training data, and rarely match your domain).
+2. **Overlap metrics** (BLEU, ROUGE, F1, GLEU, METEOR): count words shared with a reference answer; fast and repeatable, but meaning-blind.
+3. **AI-assisted judges**: a judge model scores coherence, fluency, relevance, groundedness and similarity (1–5, default pass at 3) and explains each score.
+4. **Safety evaluators**: violence, sexual content, self-harm, hate, protected material, indirect attacks, code vulnerabilities.
+5. **Human review**: calibrates the judges on a sample.
+
+Build a small, hand-checked **evaluation set** (questions, context, ideal answers) and re-run it on every prompt, model or data change, like a regression test.
+
+See also: [Overlap metrics: BLEU and ROUGE](#overlap-metrics-bleu-and-rouge), [AI judges and groundedness](#ai-judges-and-groundedness), [Risk-based evaluation gates](#risk-based-evaluation-gates)
+
+<a id="overlap-metrics-bleu-and-rouge"></a>
+
+### Overlap metrics: BLEU and ROUGE
+
+_Python_
+
+Scores (0 to 1) for how many words or word pairs a model's answer shares with a reference answer: **ROUGE** for summaries, **BLEU** for translation. They reward wording, not truth, so they miss two failures: a **good paraphrase** ("freeze it in the app" vs "block it in the app") scores low, and a **fluent hallucination** that reuses the reference's words scores mid-range.
+
+```python
+def rouge1_recall(response, reference):
+    """Share of the reference's words that appear in the response."""
+    resp = response.lower().replace(".", "").split()
+    ref = reference.lower().replace(".", "").split()
+    return sum(1 for w in ref if w in resp) / len(ref)
+
+def rouge1_precision(response, reference):
+    """Share of the response's words that appear in the reference."""
+    return rouge1_recall(reference, response)
+
+reference, answer = "I love learning about text", "I really love learning about text"
+round(rouge1_recall(answer, reference), 2), round(rouge1_precision(answer, reference), 2)   # (1.0, 0.83)
+```
+
+See also: [Evaluating LLM outputs](#evaluating-llm-outputs), [AI judges and groundedness](#ai-judges-and-groundedness)
+
+<a id="ai-judges-and-groundedness"></a>
+
+### AI judges and groundedness
+
+_Concept, azure-ai-projects_
+
+An **AI-assisted judge** is a model deployment that scores other models' answers against criteria and writes a reason for each score. **Groundedness** is the hallucination check for RAG: is every claim in the answer supported by the retrieved context? A fluent answer that says "savings accounts pay 3.5%" when the context says 1.25% fails groundedness even though it reads well. In Foundry, evaluators are referenced by name and mapped to your dataset's columns:
+
+```python
+import os
+
+JUDGE = os.environ.get("JUDGE_DEPLOYMENT", "my-judge-deployment")    # a chat deployment that does the scoring
+
+def criterion(name, evaluator, mapping, judge=False, **params):
+    """One built-in Foundry evaluator; AI-assisted judges need a deployment to score with."""
+    c = {"type": "azure_ai_evaluator", "name": name,
+         "evaluator_name": f"builtin.{evaluator}", "data_mapping": mapping}
+    init = dict(params)
+    if judge:
+        init["deployment_name"] = JUDGE
+    if init:
+        c["initialization_parameters"] = init
+    return c
+
+qr = {"query": "{{item.query}}", "response": "{{item.response}}"}
+gt = {"response": "{{item.response}}", "ground_truth": "{{item.ground_truth}}"}
+criteria = [
+    criterion("groundedness", "groundedness", {**qr, "context": "{{item.context}}"}, judge=True),
+    criterion("relevance", "relevance", qr, judge=True),
+    criterion("rouge1", "rouge_score", gt, rouge_type="rouge1"),
+    criterion("violence", "violence", qr),                           # safety: no judge deployment needed
+]
+[c["evaluator_name"] for c in criteria]
+```
+
+The course's evaluation notebook passes these criteria to a cloud evaluation run, waits for it, and collects a score, a pass/fail flag and a reason for every row.
+
+See also: [Hallucination](#hallucination), [Retrieval-augmented generation (RAG)](#retrieval-augmented-generation-rag)
+
+<a id="risk-based-evaluation-gates"></a>
+
+### Risk-based evaluation gates
+
+_pandas_
+
+Pass/fail thresholds set **before** you ship, stricter where mistakes cost more. A customer-facing assistant might need groundedness, relevance, coherence and fluency of at least 4 (out of 5), safety severity of at most 1 with zero tolerance for failures, and 100% compliance with business rules checked in code (such as never asking for a PIN); an internal tool might accept 3s. Calibrate the thresholds on human-rated samples.
+
+```python
+GATES = {"customer-facing": {"groundedness": 4, "relevance": 4, "coherence": 4, "fluency": 4},
+         "internal tool":   {"groundedness": 3, "relevance": 3, "coherence": 3, "fluency": 3}}
+
+def gate(scores, profile):
+    """Which rows pass every threshold for a risk profile, and which metrics fail."""
+    limits = GATES[profile]
+    failed = scores[list(limits)].lt(pd.Series(limits))
+    return scores.assign(passed=~failed.any(axis=1),
+                         failing=failed.apply(lambda r: ", ".join(r.index[r]), axis=1))
+
+scores = pd.DataFrame({"groundedness": [5, 2, 4], "relevance": [5, 4, 3], "coherence": [4, 5, 4], "fluency": [5, 5, 4]},
+                      index=["B1", "B2", "B3"])
+gate(scores, "customer-facing")[["passed", "failing"]]               # B1 passes; B2 fails groundedness; B3 relevance
+```
+
+See also: [Evaluating LLM outputs](#evaluating-llm-outputs), [Success metrics and hypotheses](#success-metrics-and-hypotheses)
+
+<a id="safety-evaluators-and-red-teaming"></a>
+
+### Safety evaluators and red teaming
+
+_Concept_
+
+**Safety evaluators** score answers for content harms (violence, sexual content, self-harm, hate and unfairness, on a 0–7 severity scale), protected material (such as song lyrics or articles), **indirect attacks** (did the model obey instructions hidden in a document?), and code vulnerabilities. **Automated red teaming** attacks your own system before launch: seed attacks per risk category are disguised (Base64, character flips, multi-turn conversations), sent to your model or agent, and judged; the **attack success rate** per category tells you where you're exposed.
+
+No single control is enough, so use **defence in depth**: platform guardrails and content filters, Prompt Shields against jailbreaks, Entra ID roles and network isolation; plus, in your application, business rules enforced in **code** (not only in the prompt) and retrieved documents treated as untrusted. Before go-live: safety evaluations pass in every language you serve, a red-team scan has been reviewed, personal data is minimised, and monitoring has an owner.
+
+See also: [Ethical concerns with GenAI](#ethical-concerns-with-genai), [Production-readiness check](#production-readiness-check)
+
+<a id="prompting-rag-or-fine-tuning"></a>
+
+### Prompting, RAG or fine-tuning?
+
+_Concept_
+
+Three ways to make a foundation model do your task, in the order to try them:
+
+| If your problem is… | …reach for |
+| --- | --- |
+| The model lacks current or private facts | **RAG** (retrieval-augmented generation) |
+| Wrong format or tone, and instructions fix it | **Prompt engineering** |
+| Format or style still wrong, or prompts get long and costly | **Fine-tuning** (supervised, SFT) |
+| A small model should act like a big one | **Distillation** (SFT on a large model's answers) |
+| Quality is about preferences (answer A is better than B) | **Preference tuning** (DPO) |
+| Answers can be checked by a grader | **Reinforcement fine-tuning** (RFT) |
+
+Fine-tuning changes **behaviour**; RAG supplies **knowledge**. Fine-tuning won't replace safety controls, fix bad or inconsistent data, or solve a problem a clear prompt already solves, and its benefits aren't guaranteed, so measure before and after.
+
+See also: [Retrieval-augmented generation (RAG)](#retrieval-augmented-generation-rag), [Fine-tuning and LoRA](#fine-tuning-and-lora)
+
+<a id="retrieval-augmented-generation-rag"></a>
+
+### Retrieval-augmented generation (RAG)
+
+_Concept, Python_
+
+Give a model the facts it needs at question time: **retrieve** the most relevant passages from your own documents (usually by embedding similarity), put them in the prompt as **context**, and ask the model to answer **only from that context**. It keeps answers current and grounded in private data without retraining, and groundedness evaluation checks it worked. The retrieval step is ordinary semantic search:
+
+```python
+policies = ["Password reset requires the 'Forgot password' link and an SMS code.",
+            "Lost cards can be blocked in the app under Cards > Block card, or by phone 24/7.",
+            "The savings account interest rate is 1.25% per year.",
+            "International transfers take one to three working days."]
+question = "How do I block my lost card?"
+
+vec = TfidfVectorizer().fit(policies + [question])
+best = search(vec.transform([question]).toarray()[0], vec.transform(policies).toarray(), policies, top=1)
+context = best["document"].iloc[0]                   # the lost-card policy
+
+prompt = (f"Answer using ONLY the context. If the answer isn't there, say you don't know.\n\n"
+          f"Context: {context}\n\nQuestion: {question}")
+# r = client.responses.create(model=SMALL_CHAT, input=prompt)      # the generation step (Foundry)
+```
+
+See also: [Cosine similarity and semantic search](#cosine-similarity-and-semantic-search), [AI judges and groundedness](#ai-judges-and-groundedness)
+
+<a id="fine-tuning-and-lora"></a>
+
+### Fine-tuning and LoRA
+
+_Concept, NumPy_
+
+Fine-tuning continues training a pre-trained model on your own examples. **LoRA** (low-rank adaptation) does it cheaply: the original weight matrix W is **frozen**, and two thin matrices A and B (rank r, e.g. 8) learn the change, so W′ = W + B × A. For one 4,096 × 4,096 layer at rank 8, that's 65,536 trainable numbers instead of 16.8 million: less memory, faster training, small adapter files, and the model keeps its general skills. Foundry applies LoRA for you when you fine-tune supported models.
+
+```python
+d = k = 4096                                       # one weight matrix in a mid-sized transformer layer
+for r in (4, 8, 16, 64):
+    full, lora = d * k, r * (d + k)
+    print(f"rank {r:>2}: LoRA trains {lora:>9,} numbers instead of {full:,} ({lora / full:.2%})")
+```
+
+| Method | Training signal |
+| --- | --- |
+| Supervised fine-tuning (SFT) | Example prompts with ideal answers |
+| Direct preference optimisation (DPO) | Preferred vs rejected answers |
+| Reinforcement fine-tuning (RFT) | A grader scores generated answers |
+
+Supported models differ by method, training type and region, and change often: check the supported-models table before planning.
+
+See also: [Transfer learning and pre-trained models](#transfer-learning-and-pre-trained-models), [Preparing fine-tuning data](#preparing-fine-tuning-data)
+
+<a id="preparing-fine-tuning-data"></a>
+
+### Preparing fine-tuning data
+
+_Python_
+
+Fine-tuning data is a **JSONL** file: one JSON object per line, each a short conversation in the chat format (system, user, assistant messages), where the assistant message is the ideal answer. Split it into training and validation files, and **validate before you pay**: every example should end with the assistant, no message may be empty, and the same rules (format, tone, required sentences) should hold in every ideal answer.
+
+```python
+import json
+
+SYSTEM = "You are Contoso Bank's Client Care assistant. Reply to the customer's email."
+examples = [
+    {"messages": [{"role": "system", "content": SYSTEM},
+                  {"role": "user", "content": "I forgot my e-banking password."},
+                  {"role": "assistant", "content": "Dear customer, select 'Forgot password' and confirm the SMS code. Policy reference: POL-PWD-01"}]},
+    {"messages": [{"role": "system", "content": SYSTEM},
+                  {"role": "user", "content": "My card is lost!"},
+                  {"role": "assistant", "content": "Dear customer, block it in the app under Cards > Block card. Policy reference: POL-CARD-02"}]},
+]
+with open("training.jsonl", "w", encoding="utf-8") as f:
+    for ex in examples:
+        f.write(json.dumps(ex) + "\n")
+
+def check(rows):
+    """Problems that would waste a paid fine-tuning run."""
+    problems = []
+    for i, r in enumerate(rows):
+        roles = [m["role"] for m in r["messages"]]
+        if roles[-1] != "assistant":
+            problems.append((i, "last message is not from the assistant"))
+        if any(not m["content"].strip() for m in r["messages"]):
+            problems.append((i, "empty message"))
+        if "Policy reference:" not in r["messages"][-1]["content"]:
+            problems.append((i, "answer is missing the policy reference"))
+    return problems
+
+rows = [json.loads(line) for line in open("training.jsonl", encoding="utf-8")]
+check(rows)                                         # []: ready to upload
+```
+
+Upload the files and start the job with the OpenAI client (`client.files.create(file=open("training.jsonl", "rb"), purpose="fine-tune")`, then `client.fine_tuning.jobs.create(model=..., training_file=..., validation_file=...)`), monitor the training and validation loss curves, deploy the result, and compare **before vs after** on held-out examples with the same evaluation set. If the base model with a good prompt is as good, keep the base model.
+
+See also: [Fine-tuning and LoRA](#fine-tuning-and-lora), [Evaluating LLM outputs](#evaluating-llm-outputs), [Read and save every file type (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#read-and-save-every-file-type), [JSON (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#json)
+
+---
+
+<a id="s41-deploying-and-operating-models"></a>
+
+## 41. Deploying and operating models
+
+_What happens after the notebook: MLOps, choosing between batch and online inference, cloud options and cost trade-offs, a production-readiness check, monitoring for drift, and MLflow for tracking, packaging, registering, serving and rolling back a scikit-learn pipeline. Examples use the course's South African heart-disease data (`SAheart.data`) and MLflow 3._
+
+**In your capstone:** log your final pipeline with MLflow (parameters, metrics, signature), show that the logged model reproduces your predictions, and describe how it would be deployed (batch or online), monitored for drift, and rolled back.
+
+<a id="mlops"></a>
+
+### MLOps
+
+_Concept_
+
+The practice of making machine learning workflows **repeatable, controlled, deployable and maintainable**: Build → Track → Package → Validate → Deploy → Monitor → Update. A good model isn't yet a production system. In development, the focus is data, features, algorithms and predictive performance; in production, the same preprocessing must run on every request, valid and invalid inputs must be handled reliably, and model versions must be recorded, monitored, replaced and rolled back. **Deployment** makes a model available; **MLOps** manages how it's operated over time.
+
+See also: [Refitting for production](#refitting-for-production), [Stage 10: Deploy, monitor and next steps](#stage-10-deploy-monitor-and-next-steps)
+
+<a id="batch-vs-online-inference"></a>
+
+### Batch vs online inference
+
+_Concept_
+
+The two core deployment patterns. Choose by the **operating requirement**, not by a cloud product.
+
+| | Batch inference | Online inference |
+| --- | --- | --- |
+| How | Predict many records together, on a schedule or trigger | Predict one request at a time through a live endpoint (an API) |
+| Latency | Higher latency is fine | Low latency matters |
+| Capacity | No always-on compute needed | Ready, scalable capacity |
+| Examples | Overnight delivery-risk scores, weekly customer segments, monthly demand forecasts | Fraud checks, routing decisions, live product recommendations |
+
+Questions that decide it: how quickly is the prediction needed, how many are required, is usage scheduled, steady or unpredictable, what happens if the model is unavailable, what data-location or security constraints apply, and how much idle compute is acceptable? The same model can be deployed differently when the context changes: a quarterly forecast for one meeting doesn't justify an always-on endpoint.
+
+See also: [MLOps](#mlops), [Cloud deployment options and trade-offs](#cloud-deployment-options-and-trade-offs)
+
+<a id="cloud-deployment-options-and-trade-offs"></a>
+
+### Cloud deployment options and trade-offs
+
+_Concept_
+
+Every major cloud offers the same building blocks under different names (and product names change: Google's Vertex AI is now the Agent Platform):
+
+| Need | AWS | Azure | Google Cloud |
+| --- | --- | --- | --- |
+| Managed online inference | SageMaker AI real-time (or serverless) | Azure ML managed online endpoints | Agent Platform endpoints |
+| Managed batch inference | SageMaker AI Batch Transform | Azure ML batch endpoints | Agent Platform batch inference |
+| Model management | SageMaker Model Registry | Azure ML model registry (MLflow-compatible) | Agent Platform Model Registry |
+| Production monitoring | SageMaker AI monitoring + CloudWatch | Azure ML model monitoring + Azure Monitor | Agent Platform model monitoring |
+
+Cost and performance pull against each other: ready capacity reduces latency but adds idle cost; more replicas add capacity and resilience at a price; larger models or accelerators may improve capability but cost more to run; batch processing is efficient but delays individual responses. **The most accurate model isn't automatically the best one to deploy.**
+
+See also: [Batch vs online inference](#batch-vs-online-inference)
+
+<a id="production-readiness-check"></a>
+
+### Production-readiness check
+
+_Concept_
+
+Five questions before anything depends on your model:
+
+- **Reproducible**: can we identify the pipeline, parameters, dependencies and model version?
+- **Valid**: are expected inputs defined and tested, including invalid ones?
+- **Observable**: can we detect errors, latency problems, data changes and performance decline?
+- **Recoverable**: can we return to a previous working version?
+- **Owned**: is responsibility for monitoring and maintenance clear?
+
+See also: [Model drift and monitoring](#model-drift-and-monitoring), [Model registry, aliases and rollback](#model-registry-aliases-and-rollback)
+
+<a id="model-drift-and-monitoring"></a>
+
+### Model drift and monitoring
+
+_Concept, SciPy_
+
+**Drift** is when live data stops looking like the training data, one of the most common reasons an accurate model quietly gets worse. **Input drift**: the features change (e.g. older patients who smoke more). **Prediction drift**: the model's outputs shift (e.g. 29% → 46% flagged as at risk). **Concept drift**: the relationship between features and outcome changes. A two-sample **Kolmogorov–Smirnov (KS) test** per numeric feature is a simple check (it measures the largest gap between the two features' cumulative distributions, from 0 to 1, and gives a p-value for "same distribution"); the response is to alert a person, check real outcomes, and retrain or roll back.
+
+```python
+from scipy.stats import ks_2samp
+
+heart = pd.read_csv("../data/SAheart.data", skipinitialspace=True)
+heart["famhist"] = (heart["famhist"] == "Present").astype(int)
+X = heart.drop(columns=["row.names", "chd"])
+y = heart["chd"]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y, random_state=2022)
+
+rng = np.random.default_rng(7)                                    # simulate a drifted batch: older, heavier smokers
+new_batch = X_test.sample(200, replace=True, random_state=7).reset_index(drop=True)
+new_batch["age"] = (new_batch["age"] + rng.normal(10, 3, len(new_batch))).clip(upper=70).round()
+new_batch["tobacco"] = new_batch["tobacco"] * 1.5
+
+drift = pd.DataFrame([(col, *ks_2samp(X_train[col], new_batch[col])) for col in X_train.columns],
+                     columns=["feature", "KS statistic", "p-value"]).set_index("feature")
+drift["drift?"] = np.where(drift["p-value"] < 0.01, "YES", "no")
+drift.sort_values("KS statistic", ascending=False).round(4).head()    # age shifts most (KS 0.31); obesity also flagged
+```
+
+> **Watch out:** with large batches, tiny harmless shifts become "significant", so judge the **size** of the shift (the KS statistic, or the change in predicted rates) as well as the p-value, and confirm with real outcomes when they arrive.
+
+See also: [p-value (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#p-value), [Refitting for production](#refitting-for-production)
+
+<a id="mlflow"></a>
+
+### MLflow
+
+_Concept, MLflow_
+
+An open-source platform for managing models across their lifecycle, from "I trained a model in my notebook" to "I know how it was created, I can reproduce it, and I can make it available for predictions". It does four jobs: **track** (record parameters, metrics and context for every run), **package** (save the trained pipeline with the inputs and outputs it expects), **register** (promote a chosen version into a central registry, with aliases for the live version) and **serve** (expose the saved model as a prediction endpoint). The tracking UI (`mlflow ui`) shows runs side by side.
+
+**MLflow 3 changes** (check the documentation if older tutorials fail): the default tracking store is a SQLite database and the old `./mlruns` folder store raises an error; each logged model gets its own ID (`models:/m-…`) and `log_model` takes `name=` instead of `artifact_path=`; registry **aliases** (`champion`, `challenger`) replace the old Staging/Production stages; and scikit-learn models are saved with **skops** rather than pickle (safer to load).
+
+See also: [Tracking and logging a pipeline with MLflow](#tracking-and-logging-a-pipeline-with-mlflow), [Library version changes to know](#library-version-changes-to-know)
+
+<a id="tracking-and-logging-a-pipeline-with-mlflow"></a>
+
+### Tracking and logging a pipeline with MLflow
+
+_MLflow, scikit-learn_
+
+Log the **complete pipeline** (preprocessing + model), not just the model, so training and inference use the same logic; a model logged without its scaler gives wrong predictions on raw data. A run records **parameters**, **metrics**, **tags**, a **signature** (the expected input and output columns and types) and an **input example**, and the logged model must reproduce the original predictions.
+
+```python
+import mlflow
+from mlflow.models import infer_signature
+
+mlflow.set_tracking_uri("sqlite:///mlflow.db")                  # MLflow 3: a local SQLite tracking store
+mlflow.set_experiment("heart-disease-mlops")
+
+params = {"C": 0.123, "penalty": "l1", "solver": "liblinear", "max_iter": 2000, "random_state": 2022}
+pipe = Pipeline([("sc", StandardScaler()), ("lr", LogisticRegression(**params))]).fit(X_train, y_train)
+probabilities = pipe.predict_proba(X_test)[:, 1]
+scores = {"accuracy": metrics.accuracy_score(y_test, pipe.predict(X_test)),
+          "roc_auc": metrics.roc_auc_score(y_test, probabilities)}
+
+input_example = X_test.iloc[:3]
+signature = infer_signature(input_example, pipe.predict(input_example))
+with mlflow.start_run(run_name="logreg-l1") as run:
+    mlflow.log_params(params)
+    mlflow.log_metrics(scores)
+    mlflow.set_tags({"owner": "capstone", "data": "SAheart"})
+    model_info = mlflow.sklearn.log_model(pipe, name="model", signature=signature, input_example=input_example)
+
+loaded = mlflow.pyfunc.load_model(model_info.model_uri)          # reload exactly as an application would
+assert np.array_equal(loaded.predict(input_example), pipe.predict(input_example))
+model_info.model_uri, {k: round(v, 3) for k, v in scores.items()}
+```
+
+The run's parameters and metrics can be read back with `mlflow.MlflowClient().get_run(run.info.run_id).data`.
+
+See also: [Pipeline](#pipelines-in-tuning), [Saving a fitted pipeline (joblib)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#saving-a-fitted-pipeline-joblib), [Reproducibility habits](#reproducibility-habits), [Read and save every file type (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#read-and-save-every-file-type)
+
+<a id="model-registry-aliases-and-rollback"></a>
+
+### Model registry, aliases and rollback
+
+_MLflow_
+
+The **registry** gives each registered candidate a version number (v1, v2, …) under one model name. An **alias** is a movable label: applications load `models:/heart-risk-classifier@champion`, so deploying a new version, or **rolling back** to the old one, means moving the alias, with no code change.
+
+```python
+client = mlflow.MlflowClient()
+NAME = "heart-risk-classifier"
+v1 = mlflow.register_model(model_info.model_uri, NAME)
+client.set_registered_model_alias(NAME, "champion", v1.version)
+
+champion = mlflow.pyfunc.load_model(f"models:/{NAME}@champion")    # what applications use
+batch = X_test.copy()
+batch["predicted_chd"] = champion.predict(X_test)                 # batch scoring with the same model
+batch["model_version"] = v1.version
+batch.to_csv("batch_predictions.csv", index=False)
+round(batch["predicted_chd"].mean(), 3)                           # share flagged
+
+# rollback: point "champion" back at an earlier version
+# client.set_registered_model_alias(NAME, "champion", "1")
+```
+
+See also: [MLflow](#mlflow), [Production-readiness check](#production-readiness-check), [Export clean data and figures (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#export-clean-data-and-figures)
+
+<a id="serving-a-model-locally-and-testing-requests"></a>
+
+### Serving a model locally and testing requests
+
+_MLflow, requests_
+
+`mlflow models serve` turns a logged model into a local REST endpoint, the same contract a cloud endpoint uses. Test three things: the **health** endpoint responds, a **valid** request returns predictions, and an **invalid** request (missing or renamed column, wrong type, empty body) returns a clear error rather than a wrong answer. Local serving proves the deployment path; production adds security, scaling, monitoring and operational controls.
+
+```python
+# In a terminal (serves the champion on port 5001, using the current Python environment):
+#   mlflow models serve -m "models:/heart-risk-classifier@champion" --port 5001 --env-manager local
+import requests
+
+payload = {"dataframe_split": X_test.iloc[:2].to_dict(orient="split")}   # columns + rows, as MLflow expects
+# requests.get("http://127.0.0.1:5001/health").status_code               -> 200
+# requests.post("http://127.0.0.1:5001/invocations", json=payload).json() -> {"predictions": [...]}
+bad = {"dataframe_split": X_test.iloc[:2].drop(columns="age").to_dict(orient="split")}
+# requests.post(..., json=bad).status_code                                -> 400 (missing column 'age')
+list(payload["dataframe_split"])                                          # ['index', 'columns', 'data']
+```
+
+Measure **latency** too (time 50 single-row requests): it's part of the operating requirement.
+
+See also: [Batch vs online inference](#batch-vs-online-inference), [Building a front end with Streamlit](#s42-building-a-front-end-with-streamlit), [requests library (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#requests-library), [Request and response (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#request-and-response)
+
+---
+
+<a id="s42-building-a-front-end-with-streamlit"></a>
+
+## 42. Building a front end with Streamlit
+
+_Turning a trained model into a web app that anyone can use, written entirely in Python: Streamlit's execution model, widgets and layout, caching the model, single and batch predictions, explaining a prediction, calling a model endpoint, testing the app, keeping secrets out of code, deploying it publicly, and releasing it responsibly. The worked example wraps the heart-disease pipeline from the deployment section, so the same pattern fits any capstone model._
+
+**In your capstone:** save your final pipeline, wrap it in a small Streamlit app (inputs, prediction, a short explanation, a clear statement of limitations), test it, and deploy it so reviewers can try your model in a browser.
+
+<a id="streamlit"></a>
+
+### Streamlit
+
+_Concept, Streamlit_
+
+An open-source Python library for building interactive web apps for data and models without writing HTML, CSS or JavaScript. You write an ordinary script (`app.py`) with calls such as `st.title()`, `st.slider()` and `st.write()`, run `streamlit run app.py`, and a browser tab opens with the app. The key idea: **the whole script reruns from top to bottom every time a user changes a widget**, so widgets simply return their current values, and anything slow (loading a model or data) must be cached.
+
+```python
+# pip install streamlit
+# streamlit run app.py          -> opens http://localhost:8501
+# streamlit hello               -> a built-in demo of what's possible
+```
+
+See also: [Streamlit widgets and layout](#streamlit-widgets-and-layout), [Caching models and data in Streamlit](#caching-models-and-data-in-streamlit), [Deploying and operating models](#s41-deploying-and-operating-models)
+
+<a id="streamlit-widgets-and-layout"></a>
+
+### Streamlit widgets and layout
+
+_Streamlit_
+
+Widgets collect input and return its current value; display functions show text, tables, charts and metrics; layout functions arrange them.
+
+| Purpose | Functions |
+| --- | --- |
+| Text | `st.title`, `st.header`, `st.markdown`, `st.write` (shows almost anything), `st.caption` |
+| Numeric input | `st.number_input`, `st.slider` |
+| Choices | `st.selectbox`, `st.radio`, `st.multiselect`, `st.checkbox`, `st.toggle` |
+| Files and actions | `st.file_uploader`, `st.button`, `st.download_button` |
+| Output | `st.metric`, `st.dataframe`, `st.line_chart`, `st.bar_chart`, `st.pyplot`, `st.success`, `st.warning`, `st.error` |
+| Layout | `st.sidebar`, `st.columns`, `st.tabs`, `st.expander`, `st.form` |
+
+```python
+import streamlit as st
+
+st.title("Heart-disease risk")
+age = st.slider("Age", min_value=15, max_value=70, value=45)
+famhist = st.radio("Family history of heart disease?", ["Absent", "Present"], horizontal=True)
+left, right = st.columns(2)
+with left:
+    sbp = st.number_input("Systolic blood pressure", min_value=90, max_value=220, value=130)
+with right:
+    ldl = st.number_input("LDL cholesterol", min_value=0.5, max_value=15.0, value=4.0, step=0.1)
+with st.sidebar:
+    st.markdown("**About this app**: a teaching demo, not medical advice.")
+```
+
+Wrap several inputs in `with st.form("inputs"):` plus `st.form_submit_button("Predict")` so the app reruns once when the user submits, not after every change.
+
+See also: [Streamlit](#streamlit), [A prediction app for your capstone model](#a-prediction-app-for-your-capstone-model)
+
+<a id="caching-models-and-data-in-streamlit"></a>
+
+### Caching models and data in Streamlit
+
+_Streamlit_
+
+Because the script reruns on every interaction, loading a model or a large file each time would make the app crawl. Two decorators keep results between reruns: `@st.cache_resource` for **objects shared by all users** that shouldn't be copied (a fitted model or pipeline, a database connection), and `@st.cache_data` for **data** (DataFrames, API results), which returns a fresh copy each time so one user can't change another's data.
+
+```python
+import joblib
+
+@st.cache_resource
+def load_model(path="models/heart_pipeline.joblib"):
+    return joblib.load(path)                          # loaded once, then reused on every rerun
+
+@st.cache_data
+def load_reference_data(path="../data/SAheart.data"):
+    return pd.read_csv(path, skipinitialspace=True)    # cached; ttl="1h" would refresh it hourly
+```
+
+> **Watch out:** clear the cache (the app's ⋮ menu → Clear cache, or restart) after you retrain and overwrite the model file, or the app keeps serving the old model.
+
+See also: [Saving a fitted pipeline (joblib) (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#saving-a-fitted-pipeline-joblib)
+
+<a id="a-prediction-app-for-your-capstone-model"></a>
+
+### A prediction app for your capstone model
+
+_Streamlit, scikit-learn, joblib_
+
+A complete, reusable pattern in three files: a script that trains and **saves the whole pipeline**, a small module of plain functions (easy to test), and the Streamlit app. The app never refits anything: it only loads the saved pipeline and calls `predict_proba`.
+
+```python
+# train_model.py: run once, and again whenever you retrain
+from pathlib import Path
+import joblib
+
+heart = pd.read_csv("../data/SAheart.data", skipinitialspace=True)
+heart["famhist"] = (heart["famhist"] == "Present").astype(int)
+FEATURES = ["sbp", "tobacco", "ldl", "adiposity", "famhist", "typea", "obesity", "alcohol", "age"]
+X, y = heart[FEATURES], heart["chd"]
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.25, stratify=y, random_state=2022)
+pipeline = Pipeline([("sc", StandardScaler()), ("lr", LogisticRegression(max_iter=2000))]).fit(X_tr, y_tr)
+print("test ROC AUC:", round(metrics.roc_auc_score(y_te, pipeline.predict_proba(X_te)[:, 1]), 3))
+Path("models").mkdir(exist_ok=True)
+joblib.dump({"pipeline": pipeline, "features": FEATURES}, "models/heart_pipeline.joblib")
+```
+
+```python
+# model_utils.py: plain functions, no Streamlit, so they can be unit-tested
+import joblib
+import numpy as np
+import pandas as pd
+
+def load_bundle(path="models/heart_pipeline.joblib"):
+    return joblib.load(path)
+
+def score(bundle, rows: pd.DataFrame) -> pd.DataFrame:
+    """Validate the columns, then add a risk probability and a label to each row."""
+    missing = [c for c in bundle["features"] if c not in rows.columns]
+    if missing:
+        raise ValueError(f"Missing columns: {missing}")
+    out = rows.copy()
+    out["risk"] = bundle["pipeline"].predict_proba(rows[bundle["features"]])[:, 1]
+    out["label"] = np.where(out["risk"] >= 0.5, "higher risk", "lower risk")
+    return out
+
+def explain(bundle, row: pd.DataFrame) -> pd.Series:
+    """Each feature's push on the log-odds for one row: scaled value x coefficient."""
+    sc, lr = bundle["pipeline"].named_steps["sc"], bundle["pipeline"].named_steps["lr"]
+    z = sc.transform(row[bundle["features"]])[0]
+    return pd.Series(z * lr.coef_[0], index=bundle["features"]).sort_values()
+```
+
+```python
+# app.py: run with  streamlit run app.py
+import streamlit as st
+import pandas as pd
+from model_utils import load_bundle, score, explain
+
+st.set_page_config(page_title="Heart-disease risk", page_icon="🫀")
+bundle = st.cache_resource(load_bundle)()                         # load once, reuse on every rerun
+
+st.title("Heart-disease risk estimator")
+st.caption("A data science teaching project. Not medical advice: talk to a clinician about your health.")
+single, batch = st.tabs(["One person", "Upload a CSV"])
+
+with single:
+    with st.form("inputs"):
+        c1, c2, c3 = st.columns(3)
+        row = pd.DataFrame([{
+            "age": c1.slider("Age", 15, 70, 45),
+            "sbp": c1.number_input("Systolic blood pressure", 90, 220, 130),
+            "ldl": c1.number_input("LDL cholesterol", 0.5, 15.0, 4.0),
+            "tobacco": c2.number_input("Tobacco (kg, lifetime)", 0.0, 35.0, 1.0),
+            "adiposity": c2.number_input("Adiposity", 5.0, 45.0, 25.0),
+            "obesity": c2.number_input("Obesity (BMI)", 14.0, 47.0, 26.0),
+            "typea": c3.number_input("Type-A behaviour score", 10, 80, 53),
+            "alcohol": c3.number_input("Alcohol (units/week)", 0.0, 150.0, 7.0),
+            "famhist": int(c3.radio("Family history?", ["Absent", "Present"]) == "Present"),
+        }])
+        submitted = st.form_submit_button("Estimate risk")
+    if submitted:
+        result = score(bundle, row).iloc[0]
+        st.metric("Estimated probability of heart disease", f"{result['risk']:.0%}", help=result["label"])
+        st.subheader("What pushed this estimate up or down")
+        st.bar_chart(explain(bundle, row))
+
+with batch:
+    upload = st.file_uploader("CSV with the model's input columns", type="csv")
+    if upload is not None:
+        try:
+            scored = score(bundle, pd.read_csv(upload))
+            st.dataframe(scored)
+            st.download_button("Download predictions", scored.to_csv(index=False), "predictions.csv", "text/csv")
+        except ValueError as err:
+            st.error(str(err))                                     # a clear message, not a crash
+```
+
+See also: [Explaining a prediction in the app](#explaining-a-prediction-in-the-app), [Testing a Streamlit app](#testing-a-streamlit-app), [Read and save every file type (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#read-and-save-every-file-type)
+
+<a id="explaining-a-prediction-in-the-app"></a>
+
+### Explaining a prediction in the app
+
+_Concept, Streamlit_
+
+Public users trust (and question) a number more sensibly when they see **why**. For a linear or logistic model, each feature's contribution to one prediction is its scaled value × its coefficient (the `explain()` function above); show the largest few as a bar chart, labelled in plain language. For tree ensembles and other black boxes, compute SHAP values for the row and draw them with `st.pyplot(fig)`. Always pair an explanation with what the model **can't** tell you: these are associations in the training data, not causes, and they only hold for people like those in the data.
+
+See also: [Interpreting logistic regression coefficients](#interpreting-logistic-regression-coefficients), [SHAP (SHapley Additive exPlanations)](#shap-shapley-additive-explanations), [Global vs local explanations](#global-vs-local-explanations)
+
+<a id="session-state-in-streamlit"></a>
+
+### Session state in Streamlit
+
+_Streamlit_
+
+Normal variables reset on every rerun. `st.session_state` is a dictionary that survives reruns for **one user's session**: use it to keep a history of predictions, a counter, or a multi-step workflow.
+
+```python
+if "history" not in st.session_state:
+    st.session_state["history"] = []                               # created once per user session
+# after a prediction:  st.session_state["history"].append({"age": 45, "risk": 0.31})
+st.dataframe(pd.DataFrame(st.session_state["history"]))
+```
+
+See also: [Streamlit widgets and layout](#streamlit-widgets-and-layout)
+
+<a id="calling-a-model-endpoint-from-streamlit"></a>
+
+### Calling a model endpoint from Streamlit
+
+_Streamlit, requests_
+
+Instead of loading the model inside the app, the app can send requests to a **model endpoint** (an MLflow server, a cloud endpoint, or a Foundry deployment), which keeps large models and their compute separate from the front end. Handle failures explicitly: timeouts, error status codes and unexpected responses.
+
+```python
+import requests
+
+ENDPOINT = "http://127.0.0.1:5001/invocations"                     # e.g. from `mlflow models serve`
+
+def predict_remote(rows: pd.DataFrame):
+    payload = {"dataframe_split": rows.to_dict(orient="split")}
+    try:
+        r = requests.post(ENDPOINT, json=payload, timeout=10)
+        r.raise_for_status()
+        return r.json()["predictions"]
+    except requests.RequestException as err:
+        st.error(f"The model service didn't respond: {err}")
+        return None
+```
+
+See also: [Serving a model locally and testing requests](#serving-a-model-locally-and-testing-requests), [Secrets and configuration in Streamlit](#secrets-and-configuration-in-streamlit), [requests library (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#requests-library)
+
+<a id="testing-a-streamlit-app"></a>
+
+### Testing a Streamlit app
+
+_Streamlit, pytest_
+
+Test the logic and the app separately. The plain functions in `model_utils.py` can be checked like any Python code. Streamlit's `AppTest` runs the app **without a browser**, sets widget values, submits forms and checks what appears, so you can catch a broken app before reviewers do.
+
+```python
+from streamlit.testing.v1 import AppTest
+
+bundle = load_bundle()
+example = pd.DataFrame([{"sbp": 160, "tobacco": 5.0, "ldl": 7.0, "adiposity": 30.0, "famhist": 1,
+                         "typea": 60, "obesity": 28.0, "alcohol": 10.0, "age": 60}])
+assert 0 <= score(bundle, example)["risk"].iloc[0] <= 1             # a valid probability
+try:
+    score(bundle, example.drop(columns="age"))
+except ValueError as err:
+    print("caught:", err)                                            # caught: Missing columns: ['age']
+
+at = AppTest.from_file("app.py", default_timeout=30).run()
+assert not at.exception                                              # the app loads without errors
+at.slider[0].set_value(65)                                           # age
+at.button[0].click().run()                                           # submit the form
+at.metric[0].value                                                   # e.g. '30%' for a 65-year-old
+```
+
+See also: [Testing AI-generated code](#testing-ai-generated-code), [A prediction app for your capstone model](#a-prediction-app-for-your-capstone-model)
+
+<a id="secrets-and-configuration-in-streamlit"></a>
+
+### Secrets and configuration in Streamlit
+
+_Streamlit_
+
+Never put API keys, passwords or endpoint tokens in `app.py` or in Git. Locally, put them in `.streamlit/secrets.toml` (and add that file to `.gitignore`); when deployed, paste the same content into the hosting platform's secrets settings. Read them with `st.secrets`.
+
+```python
+# .streamlit/secrets.toml   (never committed)
+#   MODEL_ENDPOINT = "https://my-endpoint.example.com/invocations"
+#   API_KEY = "..."
+def get_secret(name, default=None):
+    """Read a secret from .streamlit/secrets.toml (or the host's settings), with a fallback."""
+    try:
+        return st.secrets[name]
+    except Exception:                       # no secrets file at all, or no such key
+        return default
+
+endpoint = get_secret("MODEL_ENDPOINT", "http://127.0.0.1:5001/invocations")
+```
+
+> **Watch out:** reading `st.secrets` when **no** `secrets.toml` exists raises `StreamlitSecretNotFoundError` (even `st.secrets.get(...)` with a default), so wrap access in a helper like `get_secret()` if the app must also run without secrets.
+
+See also: [Data privacy with GenAI tools](#data-privacy-with-genai-tools), [Calling Foundry models from Python](#calling-foundry-models-from-python), [Keeping API keys secret (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02/blob/main/Readme.MD#keeping-api-keys-secret)
+
+<a id="deploying-a-streamlit-app"></a>
+
+### Deploying a Streamlit app
+
+_Concept, Streamlit_
+
+The quickest public option is **Streamlit Community Cloud** (free for public apps): push the app to a public GitHub repository with a `requirements.txt` that pins your library versions (especially scikit-learn, so the saved pipeline loads), sign in at share.streamlit.io, choose the repository, branch and main file (`app.py`), add secrets in the app's settings, and deploy; every push to the branch redeploys. Alternatives: **Hugging Face Spaces** (also free, Streamlit supported), or a container (`Dockerfile`) on a cloud service when you need private networking or scaling.
+
+```text
+my-capstone-app/
+├── app.py
+├── model_utils.py
+├── requirements.txt          # streamlit, scikit-learn==<the version you trained with>, pandas, joblib
+├── models/heart_pipeline.joblib
+└── .streamlit/
+    └── secrets.toml          # local only: listed in .gitignore
+```
+
+> **Watch out:** a pipeline saved with one scikit-learn version may fail or misbehave when loaded with another, so pin the version you trained with. Keep model files small (GitHub rejects files over 100 MB), and check the hosting platform's current resource limits and terms before publishing.
+
+See also: [Reproducibility habits](#reproducibility-habits), [Library version changes to know](#library-version-changes-to-know)
+
+<a id="releasing-a-model-app-to-the-public"></a>
+
+### Releasing a model app to the public
+
+_Concept_
+
+A public app is a product, so check before sharing the link:
+
+- **Purpose and limits**: say what the model predicts, for whom, how accurate it is on test data, and what it must not be used for (e.g. "not medical or financial advice").
+- **Input validation**: limit widgets to sensible ranges, check uploaded files' columns, and show clear errors instead of crashing.
+- **Privacy**: don't store or log personal data you don't need, and don't ask for identifying information.
+- **Fairness**: check performance across groups before publishing, and say where the model is weaker.
+- **Cost and abuse**: if the app calls a paid API (an LLM), add usage limits and keep keys in secrets.
+- **Monitoring and ownership**: know who maintains it, watch for errors and drift, and be able to roll back.
+- **Accessibility**: plain language, labelled inputs, and charts that don't rely on colour alone.
+
+See also: [Production-readiness check](#production-readiness-check), [Ethical, legal and strategic implications](#ethical-legal-and-strategic-implications), [Why explainability matters](#why-explainability-matters)
+
+---
+
+<a id="course-materials-map"></a>
+
+## Course materials map
+
+Where each lesson's slides, notebooks and notes are covered in this glossary. Where a lesson has several versions of a notebook, the glossary follows the live (in-class) version. Every file name links to it in the course repository.
+
+| # | Lesson | Slides and notebooks in the course repository | Glossary sections |
+| --- | --- | --- | --- |
+| 01 | Probability | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/01%20-%20Probability): [01 - Probability](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/01%20-%20Probability/01%20-%20Probability.pdf), [02-probability-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/01%20-%20Probability/02-probability-live.ipynb), [02-probability](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/01%20-%20Probability/02-probability.ipynb) | [12. Probability](#s12-probability) |
+| 02 | Linear regression | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/02%20-%20Linear%20Regression%20I): [02 - ML-Linear-Regression](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/02%20-%20Linear%20Regression%20I/02%20-%20ML-Linear-Regression.pdf), [02-simple-linear-regression-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/02%20-%20Linear%20Regression%20I/02-simple-linear-regression-live.ipynb), [02-simple-linear-regression](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/02%20-%20Linear%20Regression%20I/02-simple-linear-regression.ipynb), [03-multiple-linear-regression-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/02%20-%20Linear%20Regression%20I/03-multiple-linear-regression-live.ipynb), [03-multiple-linear-regression](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/02%20-%20Linear%20Regression%20I/03-multiple-linear-regression.ipynb), [linear_regression-review-lab-starter](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/02%20-%20Linear%20Regression%20I/practice/linear_regression-review-lab-starter.ipynb) | [13. Machine learning foundations and linear regression](#s13-machine-learning-foundations-and-linear-regression) |
+| 04 | Regression metrics | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/04%20-%20Regression%20Metrics): [02-regression-metrics-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/04%20-%20Regression%20Metrics/02-regression-metrics-live.ipynb), [02-regression-metrics](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/04%20-%20Regression%20Metrics/02-regression-metrics.ipynb), [04 - ML-Regression-Metrics](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/04%20-%20Regression%20Metrics/04%20-%20ML-Regression-Metrics.pdf) | [14. Regression metrics](#s14-regression-metrics) |
+| 05 | Model generalizability | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/05%20-%20Model%20Generalizability): [02-train-test-split-cross-validation-live-classroom](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/05%20-%20Model%20Generalizability/02-train-test-split-cross-validation-live-classroom.ipynb), [02-train-test-split-cross-validation](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/05%20-%20Model%20Generalizability/02-train-test-split-cross-validation.ipynb), [05 - ML-Model-Generalizability-Bias-Variance](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/05%20-%20Model%20Generalizability/05%20-%20ML-Model-Generalizability-Bias-Variance.pdf), [05a - residuals](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/05%20-%20Model%20Generalizability/05a%20-%20residuals.pdf) | [15. Generalization, bias–variance and cross-validation](#s15-generalization-bias-variance-and-cross-validation) |
+| 06 | Model workflow | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/06%20-%20Model%20Workflow): [02-model-workflow-live-classroom](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/06%20-%20Model%20Workflow/02-model-workflow-live-classroom.ipynb), [02-model-workflow](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/06%20-%20Model%20Workflow/02-model-workflow.ipynb), [06 - ML-Model-Workflow](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/06%20-%20Model%20Workflow/06%20-%20ML-Model-Workflow.pdf) | [15. Generalization, bias–variance and cross-validation](#s15-generalization-bias-variance-and-cross-validation) |
+| 07 | k-nearest neighbors | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/07%20-%20k-Nearest%20Neighbors): [02-knn-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/07%20-%20k-Nearest%20Neighbors/02-knn-live.ipynb), [02-knn](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/07%20-%20k-Nearest%20Neighbors/02-knn.ipynb), [07 - ML-k-Nearest-Neighbors](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/07%20-%20k-Nearest%20Neighbors/07%20-%20ML-k-Nearest-Neighbors.pdf) | [16. k-Nearest Neighbors](#s16-k-nearest-neighbors) |
+| 08 | Logistic regression | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/08%20-%20Logistic%20Regression): [02-logistic-regression-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/08%20-%20Logistic%20Regression/02-logistic-regression-live.ipynb), [02-logistic-regression](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/08%20-%20Logistic%20Regression/02-logistic-regression.ipynb), [08 - ML-Logistic-Regression](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/08%20-%20Logistic%20Regression/08%20-%20ML-Logistic-Regression.pdf), [logistic-regression-practice-solution](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/08%20-%20Logistic%20Regression/practice/logistic-regression-practice-solution.ipynb), [logistic-regression-practice](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/08%20-%20Logistic%20Regression/practice/logistic-regression-practice.ipynb) | [17. Logistic regression](#s17-logistic-regression) |
+| 09 | Classification metrics | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/09%20-%20Classification%20Metrics): [02-classification-metrics-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/09%20-%20Classification%20Metrics/02-classification-metrics-live.ipynb), [02-classification-metrics](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/09%20-%20Classification%20Metrics/02-classification-metrics.ipynb), [03-roc-auc-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/09%20-%20Classification%20Metrics/03-roc-auc-live.ipynb), [03-roc-auc](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/09%20-%20Classification%20Metrics/03-roc-auc.ipynb), [09 - ML-Classification-Metrics](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/09%20-%20Classification%20Metrics/09%20-%20ML-Classification-Metrics.pdf) | [18. Classification metrics](#s18-classification-metrics) |
+| 10 | Imbalanced classes | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/10%20-%20Imbalanced%20Data): [02-imbalanced-data-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/10%20-%20Imbalanced%20Data/02-imbalanced-data-live.ipynb), [02-imbalanced-data](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/10%20-%20Imbalanced%20Data/02-imbalanced-data.ipynb), [10 - Imbalanced Classes](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/10%20-%20Imbalanced%20Data/10%20-%20Imbalanced%20Classes.pdf) | [19. Imbalanced classes](#s19-imbalanced-classes) |
+| 11 | Regularization | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/11%20-%20Regularization): [02-regularization-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/11%20-%20Regularization/02-regularization-live.ipynb), [02-regularization](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/11%20-%20Regularization/02-regularization.ipynb), [11 - ML-Regularization](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/11%20-%20Regularization/11%20-%20ML-Regularization.pdf) | [20. Regularization](#s20-regularization) |
+| 12 | Grid search and pipelines | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/12%20-%20Grid%20Search%20and%20Pipelines): [02-gridsearch-pipelines-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/12%20-%20Grid%20Search%20and%20Pipelines/02-gridsearch-pipelines-live.ipynb), [02-gridsearch-pipelines](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/12%20-%20Grid%20Search%20and%20Pipelines/02-gridsearch-pipelines.ipynb), [03-gridsearch-pipelines-practice-solution](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/12%20-%20Grid%20Search%20and%20Pipelines/03-gridsearch-pipelines-practice-solution.ipynb), [03-gridsearch-pipelines-practice](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/12%20-%20Grid%20Search%20and%20Pipelines/03-gridsearch-pipelines-practice.ipynb), [12 - ML-GridSearch-Pipelines](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/12%20-%20Grid%20Search%20and%20Pipelines/12%20-%20ML-GridSearch-Pipelines.pdf) | [21. Hyperparameter tuning: grid search and pipelines](#s21-hyperparameter-tuning-grid-search-and-pipelines) |
+| 13 | Model explainability | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/13%20-%20Model%20Interpretation): [02-model-explainability](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/13%20-%20Model%20Interpretation/02-model-explainability.ipynb) | [22. Model explainability](#s22-model-explainability) |
+| 14 | Framing a data science problem | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/14%20-%20Framing%20a%20Data%20Science%20Problem): [calculating-roi-starter-code](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/14%20-%20Framing%20a%20Data%20Science%20Problem/calculating-roi-starter-code.ipynb) | [23. Framing a data science problem and ROI](#s23-framing-a-data-science-problem-and-roi) |
+| 15 | Leveraging GenAI as a data scientist | Slides and notes shared in class | [24. Leveraging GenAI as a data scientist](#s24-leveraging-genai-as-a-data-scientist) |
+| 16 | Time Series I: EDA | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/16%20-%20Time%20Series%20I%20-%20EDA): [graph-gen](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/16%20-%20Time%20Series%20I%20-%20EDA/graph-gen.ipynb), [ts-i-eda-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/16%20-%20Time%20Series%20I%20-%20EDA/ts-i-eda-live.ipynb), [ts-i-eda-starter](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/16%20-%20Time%20Series%20I%20-%20EDA/ts-i-eda-starter.ipynb) | [25. Time series: data handling and stationarity](#s25-time-series-data-handling-and-stationarity) |
+| 17 | Time Series II: modeling | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/17%20-%20Time%20Series%20II%20-%20Modeling): [ts-ii-modeling-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/17%20-%20Time%20Series%20II%20-%20Modeling/ts-ii-modeling-live.ipynb), [ts-ii-modeling-starter](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/17%20-%20Time%20Series%20II%20-%20Modeling/ts-ii-modeling-starter.ipynb) | [25. Time series: data handling and stationarity](#s25-time-series-data-handling-and-stationarity), [26. Time series: forecasting models](#s26-time-series-forecasting-models) |
+| 18 | Time Series III: GLS, GARCH and VAR | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/18%20-%20Time%20Series%20III%20-%20FB%20Prophet): [ts-iii-model-demos](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/18%20-%20Time%20Series%20III%20-%20FB%20Prophet/ts-iii-model-demos.ipynb) | [26. Time series: forecasting models](#s26-time-series-forecasting-models) |
+| 19 | Introduction to simulation | Notes shared in class | [27. Simulation](#s27-simulation) |
+| 20 | Decision trees with CART | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/20%20-%20Decision%20Trees%20with%20CART): [02-decision-trees-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/20%20-%20Decision%20Trees%20with%20CART/02-decision-trees-live.ipynb), [02-decision-trees](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/20%20-%20Decision%20Trees%20with%20CART/02-decision-trees.ipynb), [20 - Decision Trees with CART](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/20%20-%20Decision%20Trees%20with%20CART/20%20-%20Decision%20Trees%20with%20CART.pdf), [visualization-carts](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/20%20-%20Decision%20Trees%20with%20CART/visualization-carts.ipynb) | [28. Decision trees](#s28-decision-trees) |
+| 21 | Bagging, random forests and ensembles combined | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/21%20-%20Bootstrapping%20Bagging%20and%20Random%20Forests): [02-ensembles-bagging-random-forest](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/21%20-%20Bootstrapping%20Bagging%20and%20Random%20Forests/02-ensembles-bagging-random-forest.ipynb), [03-ensemble-models-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/21%20-%20Bootstrapping%20Bagging%20and%20Random%20Forests/03-ensemble-models-live.ipynb), [21 - Ensemble-Models-Bagging-Random-Forests](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/21%20-%20Bootstrapping%20Bagging%20and%20Random%20Forests/21%20-%20Ensemble-Models-Bagging-Random-Forests.pdf), [21a - Ensemble Models Combined Bagging Boosting Random Forests](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/21%20-%20Bootstrapping%20Bagging%20and%20Random%20Forests/21a%20-%20Ensemble%20Models%20Combined%20Bagging%20Boosting%20Random%20Forests.pdf) | [29. Ensembles: bagging and random forests](#s29-ensembles-bagging-and-random-forests) |
+| 22 | Boosting | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/22%20-%20Boosting): [02-ensembles-boosting](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/22%20-%20Boosting/02-ensembles-boosting.ipynb), [adaboost-from-scratch](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/22%20-%20Boosting/adaboost-from-scratch.ipynb) | [30. Ensembles: boosting](#s30-ensembles-boosting) |
+| — | Stacking and meta-models | Stacking churn lab and stacking and meta-models lab, shared in class | [29. Ensembles: bagging and random forests](#s29-ensembles-bagging-and-random-forests) |
+| 23 | Support vector machines | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/23%20-%20Support%20Vector%20Machines%20%28SVMs%29): [starter-code](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/23%20-%20Support%20Vector%20Machines%20%28SVMs%29/starter-code.ipynb) | [31. Support vector machines](#s31-support-vector-machines) |
+| 24, 29 | Gradient descent; Bayes and causal inference | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/24%20-%20Gradient%20Descent): [02-gradient-descent](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/24%20-%20Gradient%20Descent/02-gradient-descent.ipynb), [02b-bayesian-gradient-descent-causal-inference-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/24%20-%20Gradient%20Descent/02b-bayesian-gradient-descent-causal-inference-live.ipynb), [29 - Bayesian Modelling Basian Descent Causal Inference](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/24%20-%20Gradient%20Descent/29%20-%20Bayesian%20Modelling%20Basian%20Descent%20Causal%20Inference.pdf); data: [nsw_experiment.csv](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/data/nsw_experiment.csv) | [32. Gradient descent and optimization](#s32-gradient-descent-and-optimization), [37. Bayesian statistics and causal inference](#s37-bayesian-statistics) |
+| 25 | Clustering with k-means | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/25%20-%20Intro%20to%20Clustering%20with%20K-Means): [02-kmeans-NOSLIDES](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/25%20-%20Intro%20to%20Clustering%20with%20K-Means/02-kmeans-NOSLIDES.ipynb), [02-kmeans](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/25%20-%20Intro%20to%20Clustering%20with%20K-Means/02-kmeans.ipynb), [02a-kmeans-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/25%20-%20Intro%20to%20Clustering%20with%20K-Means/02a-kmeans-live.ipynb), [25 - Introduction to Clustering with K-Means](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/25%20-%20Intro%20to%20Clustering%20with%20K-Means/25%20-%20Introduction%20to%20Clustering%20with%20K-Means.pdf), [cluster_evaluation-lab](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/25%20-%20Intro%20to%20Clustering%20with%20K-Means/practice/cluster_evaluation-lab.ipynb), [kmeans_clustering-lab](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/25%20-%20Intro%20to%20Clustering%20with%20K-Means/practice/kmeans_clustering-lab.ipynb) | [33. Unsupervised learning and k-means clustering](#s33-unsupervised-learning-and-k-means-clustering) |
+| 26 | DBSCAN and other clustering techniques | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/26%20-%20DBSCAN%20and%20Other%20Clustering%20Techniques): [02-dbscan-agglom-clustering-solution](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/26%20-%20DBSCAN%20and%20Other%20Clustering%20Techniques/02-dbscan-agglom-clustering-solution.ipynb), [02-dbscan-agglom-clustering](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/26%20-%20DBSCAN%20and%20Other%20Clustering%20Techniques/02-dbscan-agglom-clustering.ipynb), [02a-dbscan-and-other-clustering-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/26%20-%20DBSCAN%20and%20Other%20Clustering%20Techniques/02a-dbscan-and-other-clustering-live.ipynb), [DBSCAN_kmeans_and_hierarchical-lab](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/26%20-%20DBSCAN%20and%20Other%20Clustering%20Techniques/practice/DBSCAN_kmeans_and_hierarchical-lab.ipynb), [practice_dbscan-lab](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/26%20-%20DBSCAN%20and%20Other%20Clustering%20Techniques/practice/practice_dbscan-lab.ipynb) | [34. DBSCAN and hierarchical clustering](#s34-dbscan-and-hierarchical-clustering) |
+| 27 | Principal component analysis | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/27%20-%20Principal%20Component%20Analysis%20%28PCA%29): [27 - pca](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/27%20-%20Principal%20Component%20Analysis%20%28PCA%29/27%20-%20pca.pdf), [Principal Component Analysis](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/27%20-%20Principal%20Component%20Analysis%20%28PCA%29/Principal%20Component%20Analysis.pdf), [doug-generator](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/27%20-%20Principal%20Component%20Analysis%20%28PCA%29/doug-generator.ipynb), [pca-blank](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/27%20-%20Principal%20Component%20Analysis%20%28PCA%29/pca-blank.ipynb), [pca-live](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/27%20-%20Principal%20Component%20Analysis%20%28PCA%29/pca-live.ipynb) | [35. Principal component analysis (PCA)](#s35-principal-component-analysis-pca) |
+| 28 | Recommender systems | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/28%20-%20Recommender%20Systems): [02-recommender-systems](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/28%20-%20Recommender%20Systems/02-recommender-systems.ipynb) | [36. Recommender systems](#s36-recommender-systems) |
+| 30 | Deploying and operating ML models | Slides and MLflow notebooks shared in class | [41. Deploying and operating models](#s41-deploying-and-operating-models) |
+| NLP | Text, embeddings, evaluation and fine-tuning on Microsoft Foundry | Two module slide decks and three notebooks, shared in class | [40. NLP and foundation models](#s40-nlp-and-foundation-models) |
+| Lab 1 | Regression: Sacramento house prices | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/labs/01%20-%20Regression-Sacramento): [lab-regression-sacramento-JUAN-OROZCOVICH](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/labs/01%20-%20Regression-Sacramento/lab-regression-sacramento-JUAN-OROZCOVICH.ipynb), [lab-regression-sacramento](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/labs/01%20-%20Regression-Sacramento/lab-regression-sacramento.ipynb) | [13. Machine learning foundations and linear regression](#s13-machine-learning-foundations-and-linear-regression) |
+| Lab 2 | Classification: predicting left-handedness | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/labs/02%20-%20Classification-LeftHanded): [lab-classification-left-handedness-WALKTHROUGH](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/labs/02%20-%20Classification-LeftHanded/lab-classification-left-handedness-WALKTHROUGH.ipynb), [lab-classification-left-handedness-YOURNAME-HERE](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/labs/02%20-%20Classification-LeftHanded/lab-classification-left-handedness-YOURNAME-HERE.ipynb) | [17. Logistic regression](#s17-logistic-regression), [18. Classification metrics](#s18-classification-metrics) |
+| Lab 3 | Supervised model comparison | [Folder](https://github.com/CharleyHananiaGA/DSB-Unit-03/tree/main/labs/03%20-%20Supervised-Model-Comparison): [lab-supervised-learning-model-comparison](https://github.com/CharleyHananiaGA/DSB-Unit-03/blob/main/labs/03%20-%20Supervised-Model-Comparison/lab-supervised-learning-model-comparison.ipynb) | [21. Hyperparameter tuning: grid search and pipelines](#s21-hyperparameter-tuning-grid-search-and-pipelines), [38. Capstone playbook](#s38-capstone-playbook) |
+| — | Neural networks | Glossary section to support capstones that use images, text or deep learning | [39. Neural networks](#s39-neural-networks) |
+| — | Streamlit front ends | Glossary section for sharing a capstone model as a web app | [42. Building a front end with Streamlit](#s42-building-a-front-end-with-streamlit) |
+| — | Capstone | Everything above, applied to your own question | [38. Capstone playbook](#s38-capstone-playbook) |
+
+---
+
 <a id="a-z-index"></a>
 
 ## A–Z index
 
 **A**
 
+- [A prediction app for your capstone model](#a-prediction-app-for-your-capstone-model)
+- [A prior is a ridge penalty (MAP estimation)](#a-prior-is-a-ridge-penalty-map-estimation)
 - [Accuracy](#accuracy)
 - [ACF plot](#acf-plot)
+- [Activation functions](#activation-functions)
 - [AdaBoost](#adaboost)
 - [AdaBoost from scratch](#adaboost-from-scratch)
 - [AdaBoostClassifier](#adaboostclassifier)
@@ -8164,6 +10285,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Adjusted R²](#adjusted-r2)
 - [Agent-based modelling (ABM)](#agent-based-modelling-abm)
 - [Agglomerative clustering](#agglomerative-clustering)
+- [AI judges and groundedness](#ai-judges-and-groundedness)
 - [AI, machine learning and deep learning](#ai-machine-learning-and-deep-learning)
 - [AIC (Akaike Information Criterion)](#aic-akaike-information-criterion)
 - [alpha (regularization strength)](#alpha-regularization-strength)
@@ -8172,6 +10294,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [ARIMA with exog (GLS in Python)](#arima-with-exog-gls-in-python)
 - [ARIMA(p, d, q)](#arima-p-d-q)
 - [ARMA(p, q)](#arma-p-q)
+- [Artificial neuron (perceptron)](#artificial-neuron-perceptron)
 - [AUC (ROC AUC)](#auc-roc-auc)
 - [Augmented Dickey–Fuller (ADF) test](#augmented-dickey-fuller-adf-test)
 - [Autocorrelation](#autocorrelation)
@@ -8179,6 +10302,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 
 **B**
 
+- [Bag of words and TF-IDF](#bag-of-words-and-tf-idf)
 - [Bagging (bootstrap aggregating)](#bagging-bootstrap-aggregating)
 - [Bagging vs boosting](#bagging-vs-boosting)
 - [BaggingClassifier](#baggingclassifier)
@@ -8187,8 +10311,10 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Base rate and false alarms](#base-rate-and-false-alarms)
 - [Base rate fallacy](#base-rate-fallacy)
 - [Baseline costs and projected savings](#baseline-costs-and-projected-savings)
+- [Batch vs online inference](#batch-vs-online-inference)
 - [Bayes' theorem](#bayes-theorem)
 - [Bayesian A/B testing](#bayesian-a-b-testing)
+- [Bayesian bootstrap](#bayesian-bootstrap)
 - [Bayesian election forecasting](#bayesian-election-forecasting)
 - [Bayesian statistics](#bayesian-statistics)
 - [Benefits of simulation](#benefits-of-simulation)
@@ -8205,14 +10331,18 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Bootstrap sample](#bootstrap-sample)
 - [Bootstrapping](#bootstrapping)
 - [Build, buy or partner](#build-buy-or-partner)
+- [Building a network in Keras](#building-a-network-in-keras)
 - [Bullseye diagram](#bullseye-diagram)
 
 **C**
 
 - [C (inverse regularization strength)](#c-inverse-regularization-strength)
 - [C (SVM)](#c-svm)
+- [Caching models and data in Streamlit](#caching-models-and-data-in-streamlit)
 - [Calibration](#calibration)
+- [Calling a model endpoint from Streamlit](#calling-a-model-endpoint-from-streamlit)
 - [Calling an LLM from Python](#calling-an-llm-from-python)
+- [Calling Foundry models from Python](#calling-foundry-models-from-python)
 - [Capstone template: classification](#capstone-template-classification)
 - [Capstone template: clustering](#capstone-template-clustering)
 - [Capstone template: regression](#capstone-template-regression)
@@ -8220,12 +10350,15 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [CART algorithm](#cart-algorithm)
 - [CatBoost](#catboost)
 - [Categorical features in kNN](#categorical-features-in-knn)
+- [Causal assumptions](#causal-assumptions)
+- [Causal inference](#causal-inference)
 - [ccp_alpha (cost-complexity pruning)](#ccp-alpha-cost-complexity-pruning)
 - [Centroid](#centroid)
 - [Centroid initialization](#centroid-initialization)
 - [Changing the threshold for imbalanced data](#changing-the-threshold-for-imbalanced-data)
 - [Chat interface vs API](#chat-interface-vs-api)
 - [Choosing a classification metric](#choosing-a-classification-metric)
+- [Choosing a foundation model](#choosing-a-foundation-model)
 - [Choosing a regression metric](#choosing-a-regression-metric)
 - [Choosing a scoring metric for tuning](#choosing-a-scoring-metric-for-tuning)
 - [Choosing a simulation approach](#choosing-a-simulation-approach)
@@ -8241,6 +10374,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Classification threshold](#classification-threshold)
 - [classification_report()](#classification-report)
 - [Closed-form solution](#closed-form-solution)
+- [Cloud deployment options and trade-offs](#cloud-deployment-options-and-trade-offs)
 - [Cluster labels are arbitrary](#cluster-labels-are-arbitrary)
 - [Clustering](#clustering)
 - [Clustering algorithms](#clustering-algorithms)
@@ -8251,6 +10385,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Common capstone mistakes checklist](#common-capstone-mistakes-checklist)
 - [Comparing AdaBoost, gradient boosting and XGBoost](#comparing-adaboost-gradient-boosting-and-xgboost)
 - [Comparing clustering algorithms](#comparing-clustering-algorithms)
+- [Comparing many models fairly](#comparing-many-models-fairly)
 - [Comparing models on the same scale](#comparing-models-on-the-same-scale)
 - [Complement (Aᶜ)](#complement-a)
 - [Complement rule](#complement-rule)
@@ -8263,13 +10398,17 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Context window](#context-window)
 - [Convergence and tolerance](#convergence-and-tolerance)
 - [Convex function](#convex-function)
+- [Convolutional neural networks (CNNs)](#convolutional-neural-networks-cnns)
 - [Core, border and noise points](#core-border-and-noise-points)
 - [Cosine similarity](#cosine-similarity)
+- [Cosine similarity and semantic search](#cosine-similarity-and-semantic-search)
+- [cost_complexity_pruning_path()](#cost-complexity-pruning-path)
 - [Counterfactual explanation](#counterfactual-explanation)
 - [Covariance matrix, eigenvectors and eigenvalues](#covariance-matrix-eigenvectors-and-eigenvalues)
 - [Credible interval](#credible-interval)
 - [Cross-validation pros and cons](#cross-validation-pros-and-cons)
 - [cross_val_score()](#cross-val-score)
+- [cross_validate() for several metrics at once](#cross-validate-multiple-metrics)
 - [cv*results*](#cv-results)
 
 **D**
@@ -8290,8 +10429,10 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [decision_function()](#decision-function)
 - [DecisionTreeClassifier and DecisionTreeRegressor](#decisiontreeclassifier-and-decisiontreeregressor)
 - [Dendrogram](#dendrogram)
+- [Deploying a Streamlit app](#deploying-a-streamlit-app)
 - [Derivative](#derivative)
 - [Design matrix](#design-matrix)
+- [Did X cause Y? A checklist and how to report it](#did-x-cause-y-a-checklist-and-how-to-report-it)
 - [Differencing and .diff()](#differencing-and-diff)
 - [Dimensionality reduction](#dimensionality-reduction)
 - [Dimensionality-reduced reconstruction](#dimensionality-reduced-reconstruction)
@@ -8311,6 +10452,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Emergence](#emergence)
 - [Ensemble model](#ensemble-model)
 - [Entropy and cross-entropy](#entropy-and-cross-entropy)
+- [Epochs, batches and optimizers](#epochs-batches-and-optimizers)
 - [eps and min_samples](#eps-and-min-samples)
 - [Equal variance / homoscedasticity (E)](#equal-variance-homoscedasticity-e)
 - [Error term (ε)](#error-term)
@@ -8318,10 +10460,12 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Ethical, legal and strategic implications](#ethical-legal-and-strategic-implications)
 - [Euclidean distance](#euclidean-distance)
 - [Evaluating a split with Gini](#evaluating-a-split-with-gini)
+- [Evaluating LLM outputs](#evaluating-llm-outputs)
 - [Event](#event)
 - [Exogenous and endogenous variables](#exogenous-and-endogenous-variables)
 - [Experiment](#experiment)
 - [Explained variance and explained variance ratio](#explained-variance-and-explained-variance-ratio)
+- [Explaining a prediction in the app](#explaining-a-prediction-in-the-app)
 - [export_text()](#export-text)
 - [External cluster metrics](#external-cluster-metrics)
 - [Extrapolation](#extrapolation)
@@ -8336,13 +10480,16 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Feature importance in ensembles](#feature-importance-in-ensembles)
 - [Feature scale in linear regression](#feature-scale-in-linear-regression)
 - [Feature scaling and gradient descent](#feature-scaling-and-gradient-descent)
+- [Feature selection in a pipeline (SelectKBest)](#feature-selection-in-a-pipeline-selectkbest)
 - [Feedback loop](#feedback-loop)
+- [Fine-tuning and LoRA](#fine-tuning-and-lora)
 - [fit_regularized() in statsmodels](#fit-regularized-in-statsmodels)
 - [fit_resample()](#fit-resample)
 - [Fitting sine exercise](#fitting-sine-exercise)
 - [Five key considerations for framing](#five-key-considerations-for-framing)
 - [Flat curves (vanishing steps)](#flat-curves-vanishing-steps)
 - [Fold](#fold)
+- [Forward pass, loss and backpropagation](#forward-pass-loss-and-backpropagation)
 - [Four pillars of simulation](#four-pillars-of-simulation)
 - [Framing checklist](#framing-checklist)
 - [Framing the problem type early](#framing-the-problem-type-early)
@@ -8394,12 +10541,14 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Influence/interest grid](#influence-interest-grid)
 - [Information criteria (AIC, BIC, Mallows's Cp)](#information-criteria-aic-bic-mallows-s-cp)
 - [Ingredients of a supervised model](#ingredients-of-a-supervised-model)
+- [Inspecting a fitted tree](#inspecting-a-fitted-tree)
 - [Interaction term](#interaction-term)
 - [Intercept (β₀)](#intercept)
 - [Interpretability](#interpretability)
 - [Interpreting coefficients](#interpreting-coefficients)
 - [Interpreting logistic regression coefficients](#interpreting-logistic-regression-coefficients)
 - [Intersection (A ∩ B)](#intersection-a-b)
+- [Inverse probability weighting (IPW)](#inverse-probability-weighting-ipw)
 - [Irreducible error](#irreducible-error)
 - [itertools.product()](#itertools-product)
 
@@ -8428,8 +10577,11 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 
 **L**
 
+- [Lab: predicting left-handedness (classification)](#lab-predicting-left-handedness)
+- [Lab: Sacramento house prices (regression)](#lab-sacramento-house-prices)
 - [labels* and cluster_centers*](#labels-and-cluster-centers)
 - [Lag (backshift) and .shift()](#lag-backshift-and-shift)
+- [LaLonde's test: observational data mislead](#lalondes-test-observational-data-mislead)
 - [Large language model (LLM)](#large-language-model-llm)
 - [Lasso regression (L1)](#lasso-regression-l1)
 - [Law of Large Numbers (LLN)](#law-of-large-numbers-lln)
@@ -8461,6 +10613,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Logistic regression vs decision trees](#logistic-regression-vs-decision-trees)
 - [LogisticRegressionCV](#logisticregressioncv)
 - [Loss function](#loss-function)
+- [Love plot](#love-plot)
 
 **M**
 
@@ -8481,12 +10634,19 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Maximal margin classifier](#maximal-margin-classifier)
 - [Mean absolute error (MAE)](#mean-absolute-error-mae)
 - [Mean centering ratings](#mean-centering-ratings)
+- [Mean shift and spectral clustering](#mean-shift-and-spectral-clustering)
 - [Mean squared error (MSE)](#mean-squared-error-mse)
 - [Mercer kernel](#mercer-kernel)
+- [Microsoft Foundry: projects and deployments](#microsoft-foundry-projects-and-deployments)
 - [Misclassification rate](#misclassification-rate)
+- [MLflow](#mlflow)
+- [MLOps](#mlops)
+- [MLPClassifier and MLPRegressor](#mlpclassifier-and-mlpregressor)
 - [MNIST digits (load_digits)](#mnist-digits-load-digits)
 - [Model complexity](#model-complexity)
+- [Model drift and monitoring](#model-drift-and-monitoring)
 - [Model explainability](#model-explainability)
+- [Model registry, aliases and rollback](#model-registry-aliases-and-rollback)
 - [Model selection cheat sheet](#model-selection-cheat-sheet)
 - [Model-specific vs model-agnostic methods](#model-specific-vs-model-agnostic-methods)
 - [Modeling workflow (end to end)](#modeling-workflow-end-to-end)
@@ -8494,6 +10654,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Monte Carlo simulation](#monte-carlo-simulation)
 - [Moving average model (MA)](#moving-average-model-ma)
 - [Multi-year ROI](#multi-year-roi)
+- [Multilayer perceptron (MLP)](#multilayer-perceptron-mlp)
 - [Multimodal LLM](#multimodal-llm)
 - [Multinomial logistic regression](#multinomial-logistic-regression)
 - [Multiple linear regression](#multiple-linear-regression)
@@ -8503,6 +10664,8 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 
 - [n_jobs and verbose](#n-jobs-and-verbose)
 - [Naive and seasonal naive forecasts](#naive-and-seasonal-naive-forecasts)
+- [Neural network](#neural-network)
+- [Neural networks in a capstone](#neural-networks-in-a-capstone)
 - [Newton's method](#newton-s-method)
 - [No multicollinearity (M)](#no-multicollinearity-m)
 - [Noise label (−1)](#noise-label-1)
@@ -8510,6 +10673,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Normality of residuals (N)](#normality-of-residuals-n)
 - [normalize() vs scalers](#normalize-vs-scalers)
 - [np.logspace()](#np-logspace)
+- [Normal–normal updating (a prior for an average)](#normal-normal-updating)
 - [np.polyfit() and np.polyval()](#np-polyfit-and-np-polyval)
 - [np.random.choice()](#np-random-choice)
 - [np.random.default_rng()](#np-random-default-rng)
@@ -8533,6 +10697,9 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Out-of-sample data](#out-of-sample-data)
 - [Outcome](#outcome)
 - [Overfitting](#overfitting)
+- [Overfitting in neural networks](#overfitting-in-neural-networks)
+- [Overlap (common support)](#overlap-common-support)
+- [Overlap metrics: BLEU and ROUGE](#overlap-metrics-bleu-and-rouge)
 - [Oversampling](#oversampling)
 
 **P**
@@ -8541,6 +10708,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [pairwise_distances()](#pairwise-distances)
 - [Parallelizable](#parallelizable)
 - [param_grid](#param-grid)
+- [ParameterGrid](#parametergrid)
 - [Parsing unstructured data with GenAI](#parsing-unstructured-data-with-genai)
 - [Partial dependence plot (PDP)](#partial-dependence-plot-pdp)
 - [Partitioning the feature space](#partitioning-the-feature-space)
@@ -8560,22 +10728,29 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Polynomial regression](#polynomial-regression)
 - [PolynomialFeatures](#polynomialfeatures)
 - [pos_label](#pos-label)
+- [Potential outcomes](#potential-outcomes)
 - [Precision](#precision)
 - [Precision–recall curve](#precision-recall-curve)
 - [Precision–recall trade-off](#precision-recall-trade-off)
 - [.predict_proba()](#predict-proba)
 - [Predictive maintenance](#predictive-maintenance)
 - [Predictor and response (and their many names)](#predictor-and-response-and-their-many-names)
+- [Preparing fine-tuning data](#preparing-fine-tuning-data)
 - [Principal component](#principal-component)
 - [Principal component analysis (PCA)](#principal-component-analysis-pca)
+- [Prior sensitivity analysis](#prior-sensitivity-analysis)
 - [Prior, likelihood and posterior](#prior-likelihood-and-posterior)
 - [Probability](#probability)
 - [Probability mass and density functions](#probability-mass-and-density-functions)
 - [Probability notation P(A)](#probability-notation-p-a)
 - [Problem framing](#problem-framing)
 - [Problem statement](#problem-statement)
+- [Production-readiness check](#production-readiness-check)
 - [Project sponsor and KPI](#project-sponsor-and-kpi)
 - [Prompting for code](#prompting-for-code)
+- [Prompting, RAG or fine-tuning?](#prompting-rag-or-fine-tuning)
+- [Propensity score](#propensity-score)
+- [Propensity score matching](#propensity-score-matching)
 - [Proxy variable](#proxy-variable)
 - [PyMC](#pymc)
 
@@ -8589,7 +10764,9 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Random forest](#random-forest)
 - [Random forest pros and cons](#random-forest-pros-and-cons)
 - [RandomForestClassifier and RandomForestRegressor](#randomforestclassifier-and-randomforestregressor)
+- [Randomised experiments and balance](#randomised-experiments-and-balance)
 - [RandomizedSearchCV](#randomizedsearchcv)
+- [RandomizedSearchCV with loguniform](#randomizedsearchcv-with-loguniform)
 - [RandomOverSampler](#randomoversampler)
 - [Rank deficiency](#rank-deficiency)
 - [Reading a statsmodels results object](#reading-a-statsmodels-results-object)
@@ -8598,21 +10775,26 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Reading train vs test scores](#reading-train-vs-test-scores)
 - [Recall (sensitivity, true positive rate)](#recall-sensitivity-true-positive-rate)
 - [Recommender system](#recommender-system)
+- [Recurrent neural networks and sequence models](#recurrent-neural-networks-and-sequence-models)
 - [Refitting for production](#refitting-for-production)
+- [Regression adjustment](#regression-adjustment)
 - [Regression vs classification tasks](#regression-vs-classification-tasks)
 - [Regularization](#regularization)
 - [Regularization is on by default](#regularization-is-on-by-default)
 - [Regularizing categorical variables](#regularizing-categorical-variables)
 - [Reinforcement learning](#reinforcement-learning)
+- [Releasing a model app to the public](#releasing-a-model-app-to-the-public)
 - [Reproducibility habits](#reproducibility-habits)
 - [.resample() for time series](#resample-for-time-series)
 - [Resampling is a trade-off](#resampling-is-a-trade-off)
 - [Residual plot](#residual-plot)
+- [Retrieval-augmented generation (RAG)](#retrieval-augmented-generation-rag)
 - [Return on investment (ROI)](#return-on-investment-roi)
 - [Ridge and Lasso trace plot](#ridge-and-lasso-trace-plot)
 - [Ridge regression (L2)](#ridge-regression-l2)
 - [RidgeCV and LassoCV](#ridgecv-and-lassocv)
 - [Risk-adjusted ROI](#risk-adjusted-roi)
+- [Risk-based evaluation gates](#risk-based-evaluation-gates)
 - [ROC curve](#roc-curve)
 - [Rolling statistics](#rolling-statistics)
 - [Root mean squared error (RMSE)](#root-mean-squared-error-rmse)
@@ -8621,6 +10803,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 
 **S**
 
+- [Safety evaluators and red teaming](#safety-evaluators-and-red-teaming)
 - [Sample space](#sample-space)
 - [Sampling bias](#sampling-bias)
 - [Sampling with and without replacement](#sampling-with-and-without-replacement)
@@ -8635,15 +10818,19 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Seasonal-mean forecast](#seasonal-mean-forecast)
 - [seasonal_decompose()](#seasonal-decompose)
 - [Seasonality](#seasonality)
+- [Secrets and configuration in Streamlit](#secrets-and-configuration-in-streamlit)
 - [Semi-supervised learning](#semi-supervised-learning)
 - [Sensitivity analysis](#sensitivity-analysis)
 - [Separating hyperplane](#separating-hyperplane)
+- [Serving a model locally and testing requests](#serving-a-model-locally-and-testing-requests)
+- [Session state in Streamlit](#session-state-in-streamlit)
 - [Set and element](#set-and-element)
 - [SHAP (SHapley Additive exPlanations)](#shap-shapley-additive-explanations)
 - [Shapley value](#shapley-value)
 - [Shrinkage and selection](#shrinkage-and-selection)
 - [Signal and noise](#signal-and-noise)
 - [Signum and indicator functions](#signum-and-indicator-functions)
+- [Silhouette plot](#silhouette-plot)
 - [Silhouette score](#silhouette-score)
 - [Simple linear regression](#simple-linear-regression)
 - [Simpson's paradox](#simpson-s-paradox)
@@ -8663,6 +10850,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Specificity (true negative rate)](#specificity-true-negative-rate)
 - [Splitting criterion](#splitting-criterion)
 - [Stacking](#stacking)
+- [Stacking in practice: is it worth it?](#stacking-in-practice)
 - [Stage 10: Deploy, monitor and next steps](#stage-10-deploy-monitor-and-next-steps)
 - [Stage 1: Frame the question](#stage-1-frame-the-question)
 - [Stage 2: Get and understand the data](#stage-2-get-and-understand-the-data)
@@ -8673,8 +10861,10 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Stage 7: Evaluate honestly](#stage-7-evaluate-honestly)
 - [Stage 8: Interpret and explain](#stage-8-interpret-and-explain)
 - [Stage 9: Communicate the value](#stage-9-communicate-the-value)
+- [Staged predictions: boosting learning curves](#staged-predictions-boosting-learning-curves)
 - [Stakeholder](#stakeholder)
 - [Standardize before regularizing](#standardize-before-regularizing)
+- [Static and contextual embeddings](#static-and-contextual-embeddings)
 - [Stationarity](#stationarity)
 - [Statistical independence](#statistical-independence)
 - [Statistical modeling](#statistical-modeling)
@@ -8686,6 +10876,8 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Stopping criteria](#stopping-criteria)
 - [Stratified split for imbalanced data](#stratified-split-for-imbalanced-data)
 - [StratifiedKFold](#stratifiedkfold)
+- [Streamlit](#streamlit)
+- [Streamlit widgets and layout](#streamlit-widgets-and-layout)
 - [Success metrics and hypotheses](#success-metrics-and-hypotheses)
 - [Sum of squared errors (SSE)](#sum-of-squared-errors-sse)
 - [Supervised learning](#supervised-learning)
@@ -8701,19 +10893,26 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 - [Technical debt](#technical-debt)
 - [Temperature and sampling](#temperature-and-sampling)
 - [test_size, stratify and shuffle](#test-size-stratify-and-shuffle)
+- [Testing a Streamlit app](#testing-a-streamlit-app)
 - [Testing AI-generated code](#testing-ai-generated-code)
+- [Text classification with TF-IDF](#text-classification-with-tf-idf)
 - [The cost of grid searching](#the-cost-of-grid-searching)
 - [The modeling workflow in scikit-learn](#the-modeling-workflow-in-scikit-learn)
+- [The negation problem](#the-negation-problem)
+- [The NLP workflow](#the-nlp-workflow)
 - [Three-way split (validation set)](#three-way-split-validation-set)
 - [Time handling in simulations](#time-handling-in-simulations)
 - [Time series](#time-series)
 - [Time series train/test split](#time-series-train-test-split)
 - [Token](#token)
+- [Tokenisation and token cost](#tokenisation-and-token-cost)
 - [Total sum of squares (SST)](#total-sum-of-squares-sst)
+- [Tracking and logging a pipeline with MLflow](#tracking-and-logging-a-pipeline-with-mlflow)
 - [Train-test ratio rule of thumb](#train-test-ratio-rule-of-thumb)
 - [Train-test split](#train-test-split)
 - [Training vs test error curve](#training-vs-test-error-curve)
 - [Transfer learning](#transfer-learning)
+- [Transfer learning and pre-trained models](#transfer-learning-and-pre-trained-models)
 - [Transformer and attention](#transformer-and-attention)
 - [Transparency](#transparency)
 - [Trend](#trend)
@@ -8738,6 +10937,7 @@ See also: [Random seed (Unit 2)](https://github.com/CharleyHananiaGA/DSB-Unit-02
 **V**
 
 - [Validating GenAI classifications](#validating-genai-classifications)
+- [Vanishing and exploding gradients](#vanishing-and-exploding-gradients)
 - [Variance (model variance)](#variance-model-variance)
 - [Variance inflation factor (VIF)](#variance-inflation-factor-vif)
 - [Vector autoregression (VAR)](#vector-autoregression-var)
